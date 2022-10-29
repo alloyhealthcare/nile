@@ -10,8 +10,7 @@
     nextPageName="Complete"
   >
     <template #content>
-      <h1>Complete {{ $page.encounter.time | luxon }}</h1>
-      {{ $page.encounter.vitals.weight }}
+      <h1 class="text-2xl mb-6 font-semibold">Review</h1>
     </template>
   </flow-detail>
 </template>

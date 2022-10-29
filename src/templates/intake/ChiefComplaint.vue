@@ -10,8 +10,7 @@
     nextPageName="Review"
   >
     <template #content>
-      <h1>Chief Complaint {{ $page.encounter.time | luxon }}</h1>
-      {{ $page.encounter.vitals.weight }}
+      <h1 class="text-2xl mb-6 font-semibold">Chief Complaint</h1>
     </template>
   </flow-detail>
 </template>

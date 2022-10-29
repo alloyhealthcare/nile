@@ -26,7 +26,8 @@ const VueTailwindComponents = {
     component: TButton,
     props: {
       // FixedClasses are applied globally regardless of variant and will be combined with other classes
-      fixedClasses: "block font-medium focus:outline-none transition-colors",
+      fixedClasses:
+        "block group font-medium focus:outline-none transition-colors",
       // Classes are applied to the component without any variant (the default)
       classes:
         "text-gray-900 px-4 py-1 rounded-xl border-2 border-transparent hover:bg-gray-0 hover:text-gray-600 hover:border-gray-400 text-base",
@@ -156,10 +157,12 @@ const VueTailwindComponents = {
   "t-input": {
     component: TInput,
     props: {
-      fixedClasses: "",
+      fixedClasses:
+        "border border-slate-200 rounded-lg focus:border-transparent focus:ring focus:ring-blue-500 block w-full",
       classes: "",
       variants: {
-        invisible: "bg-transparent border-none",
+        invisible: " border border-slate-300 bg-transparent border-none",
+        big: "text-xl p-4 ",
       },
     },
   },

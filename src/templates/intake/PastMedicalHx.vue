@@ -10,8 +10,7 @@
     nextPageName="Chief Complaint"
   >
     <template #content>
-      <h1>Past Medical Hx {{ $page.encounter.time | luxon }}</h1>
-      {{ $page.encounter.vitals.weight }}]
+      <h1 class="text-2xl mb-6 font-semibold">Past Medical History</h1>
     </template>
   </flow-detail>
 </template>

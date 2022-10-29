@@ -10,8 +10,7 @@
     nextPageName="Past Medical Hx"
   >
     <template #content>
-      <h1>Social History {{ $page.encounter.time | luxon }}</h1>
-      {{ $page.encounter.vitals.weight }}
+      <h1 class="text-2xl mb-6 font-semibold">Social History</h1>
     </template>
   </flow-detail>
 </template>
