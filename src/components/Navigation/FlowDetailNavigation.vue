@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div
-      class="flex flex-row items-center justify-between px-6 py-4 text-sm bg-white"
+      class="flex flex-row items-center justify-between px-6 py-2 text-sm bg-white"
     >
       <div class="font-semibold">
         {{ title }}

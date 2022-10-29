@@ -21,12 +21,8 @@
     <template slot="page-content">
       <div class="flex flex-row gap-x-4">
         <patient-overview-module
-          :cardTitle="$page.encounter.patient.name"
-          :chiefCompalint="$page.encounter.chiefComplaint"
-          :age="$page.encounter.patient.age"
-          :sex="$page.encounter.patient.sex"
-          :pronouns="$page.encounter.patient.pronouns"
-          :apptType="$page.encounter.type"
+          :patient="$page.encounter.patient"
+          :encounter="$page.encounter"
         />
       </div>
     </template>

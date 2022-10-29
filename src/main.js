@@ -35,7 +35,7 @@ const VueTailwindComponents = {
         primaryGreen:
           "bg-emerald-500 px-4 py-1 text-white border-2 rounded-xl  border-emerald-500 hover:bg-emerald-100 hover:border-emerald-500 hover:text-emerald-600",
         primaryBlue:
-          "bg-emerald-500 px-4 py-1 text-white border-2 rounded-xl  border-emerald-500 hover:bg-emerald-100 hover:border-emerald-500 hover:text-emerald-600",
+          "bg-blue-500 px-4 py-1 text-white border-2 rounded-xl  border-blue-500 hover:bg-blue-100 hover:border-blue-500 hover:text-blue-600",
         secondary:
           "bg-slate-100 px-4 py-1 hover:bg-blue-600 hover:text-white rounded-xl ",
         full: "w-full rounded-xl ",

@@ -4,6 +4,10 @@
     flowContext="Intake"
     :patientName="$page.encounter.patient.name"
     :flowPath="$page.encounter.path + 'intake'"
+    :prevPath="$page.encounter.path + 'intake/social-hx'"
+    prevPageName="Social Hx"
+    :nextPath="$page.encounter.path + 'intake/chief-complaint'"
+    nextPageName="Chief Complaint"
   >
     <template #content>
       <h1>Past Medical Hx {{ $page.encounter.time | luxon }}</h1>

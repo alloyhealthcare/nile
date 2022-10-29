@@ -2,23 +2,26 @@
   <flow-detail
     flowHeaderTitle="Now"
     flowContext="Intake"
-    :patientName="$page.encounter.patient.name"
+    :thisPatient="$page.encounter.patient"
     :flowPath="$page.encounter.path + 'intake'"
+    :nextPath="$page.encounter.path + 'intake/social-hx'"
+    nextPageName="Social Hx"
   >
     <template #content>
       <h1>Vitals {{ $page.encounter.time | luxon }}</h1>
-      {{ $page.encounter.path }}intake/vitals
     </template>
   </flow-detail>
 </template>
 <script>
 import Layout from "~/layouts/Default.vue";
+import SpaceNavigation from "../../components/Navigation/SpaceNavigation.vue";
 import FlowDetail from "../../layouts/FlowDetail.vue";
 
 export default {
   components: {
     Layout,
     FlowDetail,
+    SpaceNavigation,
   },
 };
 </script>
@@ -31,6 +34,12 @@ query ($id: ID!) {
         path
         patient {
           name
+          birthDate
+          mrn
+          pronouns
+          age
+          sex
+          gender
         }
         vitals {
             weight

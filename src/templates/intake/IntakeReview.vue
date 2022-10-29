@@ -4,9 +4,13 @@
     flowContext="Intake"
     :patientName="$page.encounter.patient.name"
     :flowPath="$page.encounter.path + 'intake'"
+    :prevPath="$page.encounter.path + 'intake/chief-complaint'"
+    prevPageName="Chief Complaint"
+    :nextPath="$page.encounter.path"
+    nextPageName="Complete"
   >
     <template #content>
-      <h1>Intake Review {{ $page.encounter.time | luxon }}</h1>
+      <h1>Complete {{ $page.encounter.time | luxon }}</h1>
       {{ $page.encounter.vitals.weight }}
     </template>
   </flow-detail>
