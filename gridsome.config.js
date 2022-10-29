@@ -198,7 +198,27 @@ module.exports = {
       {
         name: "Vital",
         path: "/appointment/:id/intake/vitals",
-        component: "./src/templates/Vital.vue",
+        component: "./src/templates/intake/Vitals.vue",
+      },
+      {
+        name: "SocialHistory",
+        path: "/appointment/:id/intake/social-hx",
+        component: "./src/templates/intake/SocialHx.vue",
+      },
+      {
+        name: "PastMedicalHistory",
+        path: "/appointment/:id/intake/past-medical-hx",
+        component: "./src/templates/intake/PastMedicalHx.vue",
+      },
+      {
+        name: "ChiefComplaint",
+        path: "/appointment/:id/intake/chief-complaint",
+        component: "./src/templates/intake/ChiefComplaint.vue",
+      },
+      {
+        name: "Review",
+        path: "/appointment/:id/intake/review",
+        component: "./src/templates/intake/IntakeReview.vue",
       },
       {
         name: "Note",

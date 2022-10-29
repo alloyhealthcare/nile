@@ -1,7 +1,11 @@
 <template>
   <div class="flex flex-col h-screen">
     <global-navigation />
-    <flow-detail-navigation :title="flowHeaderTitle" :context="flowContext" />
+    <flow-detail-navigation
+      :title="flowHeaderTitle"
+      :context="flowContext"
+      :navigationPath="flowPath"
+    />
     <div class="flex flex-row h-full">
       <patient-sidebar :patientName="patientName" />
       <div class="px-8 py-6 content flex-grow relative">
@@ -22,7 +26,13 @@ export default {
     FlowDetailNavigation,
     PatientSidebar,
   },
-  props: ["flowHeaderTitle", "flowContext", "patientName", "content"],
+  props: [
+    "flowHeaderTitle",
+    "flowContext",
+    "patientName",
+    "content",
+    "flowPath",
+  ],
   data() {
     return {};
   },
