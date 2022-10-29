@@ -2,7 +2,7 @@
   <flow-detail
     flowHeaderTitle="Now"
     flowContext="Note"
-    :patientName="$page.encounter.patient.name"
+    :thisPatient="$page.encounter.patient"
   >
     <template #content>
       <div class="flex flex-row gap-x-6 flex-grow">
@@ -356,9 +356,12 @@ query ($id: ID!) {
     }
     patient {
       name
+      birthDate
+      mrn
+      pronouns
       age
       sex
-      pronouns
+      gender
     }
   }
 }

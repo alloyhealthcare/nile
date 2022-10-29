@@ -2,7 +2,7 @@
   <flow-detail
     flowHeaderTitle="Now"
     flowContext="Intake"
-    :patientName="$page.encounter.patient.name"
+    :thisPatient="$page.encounter.patient"
     :flowPath="$page.encounter.path + 'intake'"
     :prevPath="$page.encounter.path + 'intake/social-hx'"
     prevPageName="Social Hx"
@@ -34,8 +34,14 @@ export default {
           apptTime
           path
           patient {
-            name
-          }
+          name
+          birthDate
+          mrn
+          pronouns
+          age
+          sex
+          gender
+        }
           vitals {
               weight
           }
