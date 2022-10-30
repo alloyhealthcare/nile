@@ -1,9 +1,5 @@
 <template>
-  <flow-detail
-    flowHeaderTitle="Now"
-    flowContext="Note"
-    :thisPatient="$page.encounter.patient"
-  >
+  <flow-detail :flow="flow" :thisPatient="$page.encounter.patient">
     <template #content>
       <div class="flex flex-row gap-x-6 flex-grow">
         <div class="w-3/5">
@@ -54,10 +50,7 @@
             </div>
           </div>
           <div class="mb-6">
-            <editor-content
-              :editor="chiefComplaintDoc"
-              class="tiptap-editor text-xl z-50"
-            />
+            <editor-content :editor="chiefComplaintDoc" class="tiptap-editor text-xl z-50" />
           </div>
           <div>
             <floating-menu
@@ -100,10 +93,7 @@
                 </button>
                 <div class="overflow-hidden">
                   <transition name="showSubMenu">
-                    <div
-                      v-if="show"
-                      class="flex flex-row overflow-hidden bg-gray-700 editor-subtoolbar"
-                    >
+                    <div v-if="show" class="flex flex-row overflow-hidden bg-gray-700 editor-subtoolbar">
                       <button
                         @click="
                           editor
@@ -216,14 +206,8 @@
                     </div>
                   </transition>
                 </div>
-                <button
-                  v-on:click="show = !show"
-                  class="bg-gray-900 rounded-lg subtoolbar-button "
-                >
-                  <font-awesome-icon
-                    :icon="['far', 'chevron-right']"
-                    class="text-xs"
-                  />
+                <button v-on:click="show = !show" class="bg-gray-900 rounded-lg subtoolbar-button ">
+                  <font-awesome-icon :icon="['far', 'chevron-right']" class="text-xs" />
                 </button>
               </div>
               <button
@@ -306,28 +290,17 @@
                 strike
               </button>
             </bubble-menu>
-            <editor-content
-              :editor="editor"
-              class="tiptap-editor text-xl z-50"
-            />
+            <editor-content :editor="editor" class="tiptap-editor text-xl z-50" />
           </div>
         </div>
-        <div
-          class="p-6 bg-slateTransparent-3 justify-self-stretch flex-grow rounded-2xl"
-        >
+        <div class="p-6 bg-slateTransparent-3 justify-self-stretch flex-grow rounded-2xl">
           <span class="font-bold text-slate-600">Suggestions</span>
         </div>
       </div>
-      <div
-        class="flex flex-row px-3 py-2 bg-white rounded-xl drop-shadow-xl absolute inset-x-0 bottom-0 mb-6 mr-6"
-      >
+      <div class="flex flex-row px-3 py-2 bg-white rounded-xl drop-shadow-xl absolute inset-x-0 bottom-0 mb-6 mr-6">
         <t-rich-select
           placeholder="Select an option"
-          :options="[
-            { value: 1, label: 'Option 1' },
-            { value: 2, label: 'Option 2' },
-            { value: 3, label: 'Option 3' },
-          ]"
+          :options="[{ value: 1, label: 'Option 1' }, { value: 2, label: 'Option 2' }, { value: 3, label: 'Option 3' }]"
         >
         </t-rich-select>
         <t-button>Wrap Up</t-button>
@@ -372,13 +345,7 @@ import VitalItemCard from "../../components/Cards/VitalItemCard.vue";
 import FlowDetail from "../../layouts/FlowDetail.vue";
 
 // import TipTap Foundaiton
-import {
-  Editor,
-  EditorContent,
-  FloatingMenu,
-  BubbleMenu,
-  VueRenderer,
-} from "@tiptap/vue-2";
+import { Editor, EditorContent, FloatingMenu, BubbleMenu, VueRenderer } from "@tiptap/vue-2";
 import StarterKit from "@tiptap/starter-kit";
 import Document from "@tiptap/extension-document";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -413,6 +380,10 @@ export default {
 
   data() {
     return {
+      flow: {
+        title: "Now",
+        context: "Note",
+      },
       editor: null,
       chiefComplaintDoc: null,
       item: null,
@@ -457,13 +428,10 @@ export default {
       editorProps: {
         attributes: {
           // Style the editor by default
-          class:
-            "editor-container focus:outline-none focus:ring-0 my-4 max-w-prose",
+          class: "editor-container focus:outline-none focus:ring-0 my-4 max-w-prose",
         },
       },
-      content: `<h2>Chief Complaint</h2><p><mark>${
-        this.$page.encounter.chiefComplaint
-      }</mark></p>`,
+      content: `<h2>Chief Complaint</h2><p><mark>${this.$page.encounter.chiefComplaint}</mark></p>`,
     });
     this.editor = new Editor({
       extensions: [
@@ -494,9 +462,7 @@ export default {
                 `Blood Pressure ${this.encounterVitals.bloodPressure}`,
                 `Temperature ${this.encounterVitals.temperature}`,
               ]
-                .filter((item) =>
-                  item.toLowerCase().startsWith(query.toLowerCase())
-                )
+                .filter((item) => item.toLowerCase().startsWith(query.toLowerCase()))
                 .slice(0, 12);
             },
 
@@ -572,8 +538,7 @@ export default {
       editorProps: {
         attributes: {
           // Style the editor by default
-          class:
-            "editor-container focus:outline-none focus:ring-0 my-4 max-w-prose",
+          class: "editor-container focus:outline-none focus:ring-0 my-4 max-w-prose",
         },
       },
     });
