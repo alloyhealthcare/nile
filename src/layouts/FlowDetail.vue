@@ -1,23 +1,23 @@
 <template>
   <div class="flex flex-col h-screen">
     <global-navigation />
-    <flow-detail-navigation :title="flow.title" :context="flow.context" :navigationPath="flow.path" />
+    <flow-detail-navigation :title="flow.title" :context="flow.context" :navigationPath="currentPath" />
     <div class="flex flex-row h-full">
       <patient-sidebar :patient="thisPatient" />
       <div class="px-8 py-6 content flex-grow relative">
         <slot name="content" />
       </div>
     </div>
-    <space-navigation v-if="flow.context == 'Intake'" class="m-6">
+    <space-navigation v-if="flow.context == 'Intake'" class="m-10">
       <template #spaceNavigationButtons>
         <div class="flex flex-row justify-between w-full">
-          <t-button variant="primaryBlue" :to="prevLink.path" v-if="prevLink.path"
-            ><span class="">{{ prevLink.name }}</span
+          <t-button variant="primaryBlue" :to="prevPath" v-if="prevPath"
+            ><span class="">{{ prevPage }}</span
             ><span class="font-semibold pl-4"> Previous </span>
           </t-button>
-          <t-button variant="primaryBlue" :to="nextLink.path"
-            ><span class="font-semibold pr-4" v-if="nextLink.name != 'Complete'"> Next </span
-            ><span class="">{{ nextLink.name }}</span></t-button
+          <t-button variant="primaryBlue" :to="nextPath"
+            ><span class="font-semibold pr-4" v-if="nextPage != 'Complete'"> Next </span
+            ><span class="">{{ nextPage }}</span></t-button
           >
         </div>
       </template>
@@ -42,18 +42,14 @@ export default {
     flow: {
       title: String,
       context: String,
-      path: String,
     },
+    currentPath: String,
     thisPatient: Object,
     content: String,
-    nextLink: {
-      path: String,
-      name: String,
-    },
-    prevLink: {
-      path: String,
-      name: String,
-    },
+    nextPath: String,
+    nextPage: String,
+    prevPath: String,
+    prevPage: String,
   },
   data() {
     return {};

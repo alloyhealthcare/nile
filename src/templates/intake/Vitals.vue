@@ -1,5 +1,13 @@
 <template>
-  <flow-detail :flow="flow" :nextLink="nextLink" :prevLink="prevLink" :thisPatient="$page.encounter.patient">
+  <flow-detail
+    :flow="flow"
+    :currentPath="$page.encounter.path + 'intake'"
+    nextPage="Social Hx"
+    :nextPath="$page.encounter.path + 'intake/social-hx'"
+    prevPage="Back"
+    :prevPath="$page.encounter.path"
+    :thisPatient="$page.encounter.patient"
+  >
     <template #content>
       <h1 class="text-2xl mb-6 font-semibold">Vital Signs</h1>
       <div class="grid grid-cols-2 gap-x-6 gap-y-8 w-3/4">
@@ -7,7 +15,9 @@
           <span class="big-input-label">Weight</span>
           <t-input variant="big"></t-input>
           <span class="vitals-input-unit">lbs</span>
-          <div class="pt-1 text-sm text-slate-500 font-semibold">15lbs</div>
+          <div class="pt-1 text-sm text-slate-500 font-semibold flex items-center gap-2">
+            <font-awesome-icon icon="fa-solid fa-plus" />15lbs
+          </div>
         </div>
         <div class="relative">
           <span class="big-input-label">Height</span>
@@ -18,8 +28,8 @@
           <span class="big-input-label">BP</span>
           <t-input variant="big"></t-input>
           <span class="vitals-input-unit">mmHg</span>
-          <div class="pt-1 text-sm text-slate-500 font-semibold">
-            Lower than normal
+          <div class="pt-1 text-sm text-slate-500 font-semibold flex items-center gap-2">
+            <font-awesome-icon icon="fa-solid fa-arrow-down-left" />Lower than normal
           </div>
         </div>
         <div class="relative">
@@ -62,28 +72,8 @@ export default {
       flow: {
         title: "Now",
         context: "Intake",
-        path: this.thisPath,
-      },
-      prevLink: {
-        name: "Back",
-        path: this.prevPage,
-      },
-      nextLink: {
-        name: "Social Hx",
-        path: this.nextPage,
       },
     };
-  },
-  computed: {
-    thisPath() {
-      return this.$page.encounter.path;
-    },
-    prevPage() {
-      return this.$page.encounter.path;
-    },
-    nextPage() {
-      return this.$page.encounter.path + "intake/social-hx";
-    },
   },
 };
 </script>

@@ -19,6 +19,8 @@ import {
   TInputGroup,
   TTag,
   TInput,
+  TRadio,
+  TTable,
 } from "vue-tailwind/dist/components";
 
 const VueTailwindComponents = {
@@ -26,8 +28,7 @@ const VueTailwindComponents = {
     component: TButton,
     props: {
       // FixedClasses are applied globally regardless of variant and will be combined with other classes
-      fixedClasses:
-        "block group font-medium focus:outline-none transition-colors",
+      fixedClasses: "block group font-medium focus:outline-none transition-colors",
       // Classes are applied to the component without any variant (the default)
       classes:
         "text-gray-900 px-4 py-1 rounded-xl border-2 border-transparent hover:bg-gray-0 hover:text-gray-600 hover:border-gray-400 text-base",
@@ -37,8 +38,7 @@ const VueTailwindComponents = {
           "bg-emerald-500 px-4 py-1 text-white border-2 rounded-xl  border-emerald-500 hover:bg-emerald-100 hover:border-emerald-500 hover:text-emerald-600",
         primaryBlue:
           "bg-blue-500 px-4 py-1 text-white border-2 rounded-xl  border-blue-500 hover:bg-blue-100 hover:border-blue-500 hover:text-blue-600",
-        secondary:
-          "bg-slate-100 px-4 py-1 hover:bg-blue-600 hover:text-white rounded-xl ",
+        secondary: "bg-slate-100 px-4 py-1 hover:bg-blue-600 hover:text-white rounded-xl ",
         full: "w-full rounded-xl ",
         link:
           "capitalize text-left text-gray-900 border-b border-blue-600 hover:bg-blue-100 px-0.5 py-0.5 hover:text-blue-600 hover:border-blue-600 rounded-t-sm",
@@ -68,8 +68,7 @@ const VueTailwindComponents = {
         wrapper: "w-card h-400 bg-white relative",
         body: "p-4 bg-white",
         header: "bg-ultraLightGray border-b px-4 py-3 rounded-t-xl",
-        footer:
-          "bg-white border-t border-gray-200 px-4 py-3 rounded-b-xl absolute inset-x-0 bottom-0 xl:mt-2 2xl:mt-5",
+        footer: "bg-white border-t border-gray-200 px-4 py-3 rounded-b-xl absolute inset-x-0 bottom-0 xl:mt-2 2xl:mt-5",
       },
       variants: {
         space: {
@@ -90,8 +89,7 @@ const VueTailwindComponents = {
           wrapper: "xl:w-2/5 2xl:w-1/3 3xl:w-1/4 bg-white",
           body: "p-4 h-144 overflow-scroll",
           header: "px-4 py-3 bg-emerald-500 text-white rounded-t-xl",
-          footer:
-            "bg-white border-t border-gray-200 px-4 py-3 rounded-b-xl bg-opacity-40 bg-blur",
+          footer: "bg-white border-t border-gray-200 px-4 py-3 rounded-b-xl bg-opacity-40 bg-blur",
         },
         preview: {
           wrapper: "shadow-xl border-0",
@@ -123,8 +121,7 @@ const VueTailwindComponents = {
         dropdownWrapper: "relative z-10",
         dropdown: "origin-top-right absolute left-0 w-56 rounded shadow mt-1",
         enterClass: "",
-        enterActiveClass:
-          "transition ease-out duration-100 transform opacity-0 scale-95",
+        enterActiveClass: "transition ease-out duration-100 transform opacity-0 scale-95",
         enterToClass: "transform opacity-100 scale-100",
         leaveClass: "transition ease-in transform opacity-100 scale-100",
         leaveActiveClass: "",
@@ -175,14 +172,54 @@ const VueTailwindComponents = {
         title: "text-2xl leading-8 font-extrabold text-gray-900 tracking-tight",
         subtitle: "text-lg leading-6 font-medium text-gray-900",
         error: "text-red-500",
-        apptType:
-          "bg-teal-light px-2 py-0.5 rounded-lg text-teal-dark font-semibold text-xs",
-        badge:
-          "inline-flex items-center px-2 py-0.5 text-sm rounded-md bg-gray-200 text-gray-700 font-medium",
+        apptType: "bg-teal-light px-2 py-0.5 rounded-lg text-teal-dark font-semibold text-xs",
+        badge: "inline-flex items-center px-2 py-0.5 text-sm rounded-md bg-gray-200 text-gray-700 font-medium",
         avatar:
           "inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500 overflow-hidden leading-none text-center",
         statusActive: "text-blue-600 font-normal text-xs",
         statusInActive: "text-gray-400 font-normal text-xs",
+      },
+    },
+  },
+  "t-radio": {
+    component: TRadio,
+    props: {
+      wrapped: true,
+      fixedClasses: {
+        label: "font-medium",
+        input: "cursor-pointer w-4 h-4 rounded-none",
+        inputWrapper: "cursor-pointer",
+        inputWrapperChecked: "",
+        wrapper:
+          "relative flex flex-row items-center gap-2 px-4 py-3 border border-slate-200 rounded-xl cursor-pointer",
+      },
+      classes: {
+        labelChecked: "text-blue-500",
+        inputWrapperChecked: "border-rose-200",
+        wapperChecked: "border-blue-500",
+      },
+      variants: {},
+    },
+  },
+  "t-table": {
+    component: TTable,
+    props: {
+      fixedClasses: {
+        table: "min-w-full",
+        thead: "",
+        theadTr: "",
+        theadTh: "px-3 py-2 font-medium text-xs text-slate-400 text-left border-b",
+        tbody: "",
+        tr: "",
+        td: "px-3 py-2 whitespace-no-wrap",
+        tfoot: "",
+        tfootTr: "",
+        tfootTd: "",
+      },
+      classes: {
+        table: "bg-white rounded-xl",
+        tbody: "text-sm divide-y divide-slate-100",
+        tr: "hover:bg-slate-200 hover:cursor-pointer",
       },
     },
   },
@@ -237,6 +274,7 @@ import {
   faSearch as farSearch,
   faTimes as farTimes,
   faClock as farClock,
+  faArrowDownLeft,
 } from "@fortawesome/pro-regular-svg-icons";
 
 import {
@@ -248,6 +286,7 @@ import {
   faWalking as fasWalking,
   faShare as fasShare,
   faClock as fasClock,
+  faArrowDownLeft as fasArrowDownLeft,
 } from "@fortawesome/pro-solid-svg-icons";
 
 // Add Specific FontAwesome Icons
@@ -297,7 +336,9 @@ library.add(
   faTimes,
   faClock,
   farClock,
-  fasClock
+  fasClock,
+  faArrowDownLeft,
+  fasArrowDownLeft
 );
 
 export default function(Vue, { router, head, isClient }) {

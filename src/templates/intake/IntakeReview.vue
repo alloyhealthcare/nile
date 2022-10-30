@@ -1,13 +1,12 @@
 <template>
   <flow-detail
-    flowHeaderTitle="Now"
-    flowContext="Intake"
-    :thisPatient="$page.encounter.patient"
-    :flowPath="$page.encounter.path + 'intake'"
+    :flow="flow"
+    :currentPath="$page.encounter.path + 'intake'"
+    nextPage="Complete"
+    :nextPath="$page.encounter.path + '/note'"
+    prevPage="Chief Complaint"
     :prevPath="$page.encounter.path + 'intake/chief-complaint'"
-    prevPageName="Chief Complaint"
-    :nextPath="$page.encounter.path"
-    nextPageName="Complete"
+    :thisPatient="$page.encounter.patient"
   >
     <template #content>
       <h1 class="text-2xl mb-6 font-semibold">Review</h1>
@@ -22,6 +21,14 @@ export default {
   components: {
     Layout,
     FlowDetail,
+  },
+  data() {
+    return {
+      flow: {
+        title: "Now",
+        context: "Intake",
+      },
+    };
   },
 };
 </script>
