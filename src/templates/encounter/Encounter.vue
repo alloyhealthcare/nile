@@ -1,9 +1,5 @@
 <template>
-  <space-vue
-    spaceTitle="Appointments"
-    spaceMeta="Test"
-    :hasSidebarActions="true"
-  >
+  <space-vue spaceTitle="Appointments" spaceMeta="Test" :hasSidebarActions="true">
     <template #spaceSidebarList>
       <item-card
         v-for="appointments in $page.encounter.user.appointments"
@@ -20,10 +16,7 @@
     </template>
     <template slot="page-content">
       <div class="flex flex-row gap-x-4">
-        <patient-overview-module
-          :patient="$page.encounter.patient"
-          :encounter="$page.encounter"
-        />
+        <patient-overview-module :patient="$page.encounter.patient" :encounter="$page.encounter" />
       </div>
     </template>
     <template #spaceNav>
@@ -127,18 +120,12 @@ export default {
     },
     previousItem() {
       return this.userItems.filter((appointment) => {
-        return (
-          appointment.apptTime != this.currentItem.apptTime &&
-          appointment.apptTime < this.currentItem.apptTime
-        );
+        return appointment.apptTime != this.currentItem.apptTime && appointment.apptTime < this.currentItem.apptTime;
       });
     },
     nextItem() {
       return this.userItems.filter((appointment) => {
-        return (
-          appointment.apptTime != this.currentItem.apptTime &&
-          appointment.apptTime > this.currentItem.apptTime
-        );
+        return appointment.apptTime != this.currentItem.apptTime && appointment.apptTime > this.currentItem.apptTime;
       });
     },
   },

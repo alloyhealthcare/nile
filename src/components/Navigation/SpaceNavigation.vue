@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      class="bottom-0 w-full p-6 bg-white space-nav rounded-2xl shadow shadow-slate-900/10"
-    >
+    <div class="bottom-0 w-full p-6 bg-white space-nav rounded-2xl shadow shadow-slate-900/10">
       <div class="flex flex-row gap-x-4">
         <slot name="spaceNavigationButtons"></slot>
       </div>

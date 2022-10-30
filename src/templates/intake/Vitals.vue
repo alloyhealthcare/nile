@@ -1,12 +1,5 @@
 <template>
-  <flow-detail
-    flowHeaderTitle="Now"
-    flowContext="Intake"
-    :thisPatient="$page.encounter.patient"
-    :flowPath="$page.encounter.path + 'intake'"
-    :nextPath="$page.encounter.path + 'intake/social-hx'"
-    nextPageName="Social Hx"
-  >
+  <flow-detail :flow="flow" :nextLink="nextLink" :prevLink="prevLink" :thisPatient="$page.encounter.patient">
     <template #content>
       <h1 class="text-2xl mb-6 font-semibold">Vital Signs</h1>
       <div class="grid grid-cols-2 gap-x-6 gap-y-8 w-3/4">
@@ -63,6 +56,34 @@ export default {
     Layout,
     FlowDetail,
     SpaceNavigation,
+  },
+  data() {
+    return {
+      flow: {
+        title: "Now",
+        context: "Intake",
+        path: this.thisPath,
+      },
+      prevLink: {
+        name: "Back",
+        path: this.prevPage,
+      },
+      nextLink: {
+        name: "Social Hx",
+        path: this.nextPage,
+      },
+    };
+  },
+  computed: {
+    thisPath() {
+      return this.$page.encounter.path;
+    },
+    prevPage() {
+      return this.$page.encounter.path;
+    },
+    nextPage() {
+      return this.$page.encounter.path + "intake/social-hx";
+    },
   },
 };
 </script>
