@@ -16,7 +16,14 @@
     </template>
     <template slot="page-content">
       <div class="flex flex-row gap-x-4">
-        <patient-overview-module :patient="$page.encounter.patient" :encounter="$page.encounter" />
+        <patient-overview-module
+          :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
+          :patient="$page.encounter.patient"
+          :encounter="$page.encounter"
+          :primaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
+          :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+          :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
+        />
       </div>
     </template>
     <template #spaceNav>
