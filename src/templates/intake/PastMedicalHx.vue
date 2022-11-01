@@ -14,24 +14,11 @@
         <h1 class="font-semibold text-lg ">Active Conditions</h1>
         <t-button>Add Condition</t-button>
       </div>
-      <div class="">
-        <div v-for="problems in $page.encounter.patient.problemsList" :key="problems.id" class="flex flex-row gap-4">
-          <div class="flex flex-row bg-white shadow w-full justify-between" @click="row = !row">
-            <div class="p-4 text-sm">{{ problems.name }}</div>
-            <div class="p-4 text-sm">{{ problems.bodySite }}</div>
-            <div class="p-4 text-sm">{{ problems.diagnosed }}</div>
-          </div>
-          <div>
-            <div class="w-2/5 p-4 bg-white shadow rounded-lg" v-if="row">{{ problems.name }} Card</div>
-          </div>
-        </div>
-      </div>
-      <!----
       <div class="flex flex-row gap-4 w-full">
         <div class="flex-1">
           <t-table :headers="['Condition', 'Body Site', 'Diagnosed']" :data="$page.encounter.patient.problemsList">
             <template slot="row" slot-scope="props">
-              <tr :class="[props.trClass]" @click="row = !row">
+              <tr :class="[props.trClass]" :to="props.row.path">
                 <td :class="props.tdClass">{{ props.row.name }}</td>
                 <td :class="props.tdClass">
                   <span v-if="props.row.bodySite != ''">{{ props.row.bodySite }}</span
@@ -52,7 +39,6 @@
           </div>
         </div>
       </div>
-      -->
     </template>
   </flow-detail>
 </template>

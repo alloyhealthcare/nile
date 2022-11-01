@@ -12,13 +12,14 @@
       <template #spaceNavigationButtons>
         <div class="flex flex-row justify-between w-full">
           <t-button variant="primaryBlue" :to="prevPath" v-if="prevPath"
-            ><span class="">{{ prevPage }}</span
+            ><font-awesome-icon icon="fa-regular fa-arrow-left" /><span class="">{{ prevPage }}</span
             ><span class="font-semibold pl-4"> Previous </span>
           </t-button>
           <t-button variant="primaryBlue" :to="nextPath"
             ><span class="font-semibold pr-4" v-if="nextPage != 'Complete'"> Next </span
-            ><span class="">{{ nextPage }}</span></t-button
-          >
+            ><span class="pr-4">{{ nextPage }}</span
+            ><font-awesome-icon icon="fa-regular fa-arrow-right"
+          /></t-button>
         </div>
       </template>
     </space-navigation>

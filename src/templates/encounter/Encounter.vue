@@ -20,7 +20,7 @@
           :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
           :patient="$page.encounter.patient"
           :encounter="$page.encounter"
-          :primaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
+          :primaryButton="primaryButton"
           :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
           :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
         />
@@ -119,6 +119,34 @@ export default {
     };
   },
   computed: {
+    primaryButton: {
+      get() {
+        if (this.$page.encounter.status == "Roomed") {
+          return {
+            path: this.currentPath + "note",
+            text: "Begin",
+          };
+        } else {
+          return {
+            path: this.currentPath + "intake/vitals",
+            text: "Begin Intake",
+          };
+        }
+      },
+      /*set(buttonPath) {
+        if (this.currentStatus == "Roomed") {
+          this.buttonPath = $page.encounter.path + "note";
+        } else {
+          this.buttonPath = $page.encounter.path + "intake/vitals";
+        }
+      },*/
+    },
+    currentStatus() {
+      return this.$page.encounter.status;
+    },
+    currentPath() {
+      return this.$page.encounter.path;
+    },
     currentItem() {
       return this.$page.encounter;
     },

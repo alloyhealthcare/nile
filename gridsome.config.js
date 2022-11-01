@@ -211,6 +211,11 @@ module.exports = {
         component: "./src/templates/intake/PastMedicalHx.vue",
       },
       {
+        name: "PastMedicalHistoryDetail",
+        path: "/appointment/:id/intake/past-medical-hx/:id",
+        component: ".src/templates/intake/PastMedicalHxDetail.vue",
+      },
+      {
         name: "ChiefComplaint",
         path: "/appointment/:id/intake/chief-complaint",
         component: "./src/templates/intake/ChiefComplaint.vue",
