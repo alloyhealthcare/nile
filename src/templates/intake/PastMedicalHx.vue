@@ -38,10 +38,22 @@
             </template>
           </t-table>
         </div> -->
-        <div class="flex flex-row gap-4" v-for="problems in currentProblem" :key="problems.id">
-          <div class="w-full">{{ problems.name }} {{ problems.bodySite.bodySite }} {{ problems.diagnosed }}</div>
-          <div class="w-2/5">
-            {{ problems.name }}
+        <div
+          class="flex flex-row gap-4"
+          ref="itemCollection"
+          v-for="problems in $page.encounter.patient.problemsList"
+          :key="problems.id"
+        >
+          <div class="w-full">
+            <a
+              ref="itemRow"
+              class="flex flex-row justify-between w-full p-4 hover:cursor-pointer"
+              @click="showCard = !showCard"
+              >{{ problems.name }} {{ problems.bodySite.bodySite }} {{ problems.diagnosed }}</a
+            >
+          </div>
+          <div ref="itemCard" class="w-2/5" v-if="showCard == true">
+            <div class="bg-white rounded-lg p-6">{{ problems.name }}</div>
           </div>
         </div>
       </div>
@@ -49,6 +61,7 @@
   </flow-detail>
 </template>
 <script>
+import { get } from "http";
 import Layout from "~/layouts/Default.vue";
 import FlowDetail from "../../layouts/FlowDetail.vue";
 
@@ -66,8 +79,14 @@ export default {
     };
   },
   computed: {
-    currentProblem() {
-      return this.$page.encounter.patient.problemsList;
+    showCard() {
+      if (
+        this.itemRow.$page.encounter.patient.problemsList.id == this.itemCard.$page.encounter.patient.problemsList.id
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   methods: {},
