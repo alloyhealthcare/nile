@@ -14,29 +14,29 @@
         <h1 class="font-semibold text-lg ">Active Conditions</h1>
         <t-button>Add Condition</t-button>
       </div>
-      <div class="flex flex-row gap-4 w-full">
+      <div class="flex flex-row gap-4 w-full relative">
         <div class="flex-1">
           <t-table :headers="['Condition', 'Body Site', 'Diagnosed']" :data="$page.encounter.patient.problemsList">
             <template slot="row" slot-scope="props">
-              <tr :class="[props.trClass]" :to="props.row.path">
+              <tr :class="props.trClass" :to="'/'" @click="row = !row">
                 <td :class="props.tdClass">{{ props.row.name }}</td>
                 <td :class="props.tdClass">
-                  <span v-if="props.row.bodySite != ''">{{ props.row.bodySite }}</span
-                  ><span v-else class="text-slate-400">N/a</span>
+                  <div v-if="props.row.bodySite != ''">
+                    <span v-for="bodySite in props.row.bodySite" :key="bodySite.id">{{ bodySite }}</span>
+                  </div>
+                  <span v-else class="text-slate-400">N/a</span>
                 </td>
                 <td :class="props.tdClass">
                   {{ props.row.diagnosed | luxon("date_med") }}
                 </td>
               </tr>
+              <div class="flex flex-col w-2/5 absolute right-0">
+                <div class="w-full">
+                  <div class="p-4 bg-white rounded-xl shadow" v-if="row">{{ props.row.name }}</div>
+                </div>
+              </div>
             </template>
           </t-table>
-        </div>
-        <div class="flex flex-col w-2/5" v-if="row">
-          <div class="w-full" v-for="problems in $page.encounter.patient.problemsList" :key="problems.id">
-            <div class="p-4 bg-white rounded-xl shadow">
-              {{ problems.name }}
-            </div>
-          </div>
         </div>
       </div>
     </template>
@@ -60,13 +60,12 @@ export default {
       row: false,
     };
   },
-  computed: {},
-  methods: {
-    showDetailCard(item, index) {
-      this.row = index;
-      this.card = item;
+  computed: {
+    currentProblem() {
+      return this.$page.encounter.patient.problemsList.id;
     },
   },
+  methods: {},
 };
 </script>
 
@@ -77,6 +76,7 @@ export default {
           apptTime
           path
           patient {
+            id
             name
             birthDate
             mrn
