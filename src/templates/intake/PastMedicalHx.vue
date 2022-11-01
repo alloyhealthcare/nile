@@ -14,8 +14,8 @@
         <h1 class="font-semibold text-lg ">Active Conditions</h1>
         <t-button>Add Condition</t-button>
       </div>
-      <div class="flex flex-row gap-4 w-full relative">
-        <div class="flex-1">
+      <div class="flex flex-col gap-4 w-full relative">
+        <!-- <div class="flex-1">
           <t-table :headers="['Condition', 'Body Site', 'Diagnosed']" :data="$page.encounter.patient.problemsList">
             <template slot="row" slot-scope="props">
               <tr :class="props.trClass" :to="'/'" @click="row = !row">
@@ -37,6 +37,12 @@
               </div>
             </template>
           </t-table>
+        </div> -->
+        <div class="flex flex-row gap-4" v-for="problems in currentProblem" :key="problems.id">
+          <div class="w-full">{{ problems.name }} {{ problems.bodySite.bodySite }} {{ problems.diagnosed }}</div>
+          <div class="w-2/5">
+            {{ problems.name }}
+          </div>
         </div>
       </div>
     </template>
@@ -57,12 +63,11 @@ export default {
         title: "Now",
         context: "Intake",
       },
-      row: false,
     };
   },
   computed: {
     currentProblem() {
-      return this.$page.encounter.patient.problemsList.id;
+      return this.$page.encounter.patient.problemsList;
     },
   },
   methods: {},
