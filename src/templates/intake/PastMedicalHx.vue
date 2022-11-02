@@ -61,7 +61,6 @@
   </flow-detail>
 </template>
 <script>
-import { get } from "http";
 import Layout from "~/layouts/Default.vue";
 import FlowDetail from "../../layouts/FlowDetail.vue";
 
@@ -79,15 +78,15 @@ export default {
     };
   },
   computed: {
-    showCard() {
+    /* showCard() {
       if (
-        this.itemRow.$page.encounter.patient.problemsList.id == this.itemCard.$page.encounter.patient.problemsList.id
+        this
       ) {
         return true;
       } else {
         return false;
       }
-    },
+    },*/
   },
   methods: {},
 };
