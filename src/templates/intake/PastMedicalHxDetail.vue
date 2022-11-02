@@ -33,7 +33,7 @@
             </template>
           </t-table>
         </div>
-        <div class="flex flex-col w-2/5" v-if="row">
+        <div class="flex flex-col w-2/5">
           <div class="w-full" v-for="problems in $page.encounter.patient.problemsList" :key="problems.id">
             <div class="p-4 bg-white rounded-xl shadow">
               {{ problems.name }}

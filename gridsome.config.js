@@ -92,7 +92,10 @@ module.exports = {
             typeName: "Condition", // required
             select: {}, // optional,
             links: [
-              // optional
+              {
+                fieldName: "Patient",
+                typeName: "Patient",
+              },
             ],
           },
           {
@@ -209,6 +212,11 @@ module.exports = {
         name: "PastMedicalHistory",
         path: "/appointment/:id/intake/past-medical-hx",
         component: "./src/templates/intake/PastMedicalHx.vue",
+      },
+      {
+        name: "PastMedicalHistoryDetail",
+        path: "/appointment/:id/intake/past-medical-hx/:patient.id",
+        component: "./src/templates/intake/PastMedicalHxDetail.vue",
       },
       {
         name: "ChiefComplaint",
