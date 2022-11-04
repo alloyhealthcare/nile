@@ -47,6 +47,7 @@ module.exports = {
               {
                 fieldName: "Encounters",
                 typeName: "Encounter",
+                linkToFirst: true,
               },
               {
                 fieldName: "Allergies List",

@@ -32,7 +32,6 @@ module.exports = function(api) {
             node {
               id
               patient {
-                id
                 encounters {
                   id
                 }
@@ -43,17 +42,14 @@ module.exports = function(api) {
       }
     `);
 
-    data.allEncounter.edges.forEach(({ node }) => {
-      createPage({
-        path: `/appointment/${node.id}/intake/past-medical-hx/${node.patient.id}`,
-        component: "./src/templates/intake/PastMedicalHxDetail.vue",
-      });
-    });
-
     data.allCondition.edges.forEach(({ node }) => {
       createPage({
-        path: `/appointment/${node.patient.encounters__id}/intake/past-medical-hx/detail/${node.id}`,
+        path: `/appointment/${node.patient.encounters.id}/intake/past-medical-hx/${node.id}`,
         component: "./src/templates/intake/PastMedicalHxDetail.vue",
+        context: {
+          id: node.id,
+          encounterId: node.patient.encounters.id,
+        },
       });
     });
   });

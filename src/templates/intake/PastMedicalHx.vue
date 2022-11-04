@@ -19,16 +19,18 @@
           <t-table :headers="['Condition', 'Body Site', 'Diagnosed']" :data="$page.encounter.patient.problemsList">
             <template slot="row" slot-scope="props">
               <tr :class="props.trClass" :to="$page.encounter.path + 'intake/past-medical-hx/' + props.row.id">
-                <td :class="props.tdClass">{{ props.row.name }}</td>
-                <td :class="props.tdClass">
-                  <div v-if="props.row.bodySite != ''">
-                    <span v-for="bodySite in props.row.bodySite" :key="bodySite.id">{{ bodySite }}</span>
-                  </div>
-                  <span v-else class="text-slate-400">N/a</span>
-                </td>
-                <td :class="props.tdClass">
-                  {{ props.row.diagnosed | luxon("date_med") }}
-                </td>
+                <g-link :to="$page.encounter.path + 'intake/past-medical-hx/' + props.row.id">
+                  <td :class="props.tdClass">{{ props.row.name }}</td>
+                  <td :class="props.tdClass">
+                    <div v-if="props.row.bodySite != ''">
+                      <span v-for="bodySite in props.row.bodySite" :key="bodySite.id">{{ bodySite }}</span>
+                    </div>
+                    <span v-else class="text-slate-400">N/a</span>
+                  </td>
+                  <td :class="props.tdClass">
+                    {{ props.row.diagnosed | luxon("date_med") }}
+                  </td>
+                </g-link>
               </tr>
             </template>
           </t-table>
@@ -36,6 +38,7 @@
         <div v-for="problem in $page.encounter.patient.problemsList" :key="problem.id">
           {{ problem.id }}
         </div>
+        {{ $page.encounter.id }}
       </div>
     </template>
   </flow-detail>
