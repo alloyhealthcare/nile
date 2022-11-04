@@ -47,7 +47,6 @@ module.exports = {
               {
                 fieldName: "Encounters",
                 typeName: "Encounter",
-                linkToFirst: true,
               },
               {
                 fieldName: "Allergies List",
@@ -95,6 +94,7 @@ module.exports = {
               {
                 fieldName: "Patient",
                 typeName: "Patient",
+                linkToFirst: true,
               },
             ],
           },
@@ -212,11 +212,6 @@ module.exports = {
         name: "PastMedicalHistory",
         path: "/appointment/:id/intake/past-medical-hx",
         component: "./src/templates/intake/PastMedicalHx.vue",
-      },
-      {
-        name: "PastMedicalHistoryDetail",
-        path: "/appointment/:id/intake/past-medical-hx/:patient.id",
-        component: "./src/templates/intake/PastMedicalHxDetail.vue",
       },
       {
         name: "ChiefComplaint",

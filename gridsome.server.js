@@ -27,12 +27,32 @@ module.exports = function(api) {
             }
           }
         }
+        allCondition {
+          edges {
+            node {
+              id
+              patient {
+                id
+                encounters {
+                  id
+                }
+              }
+            }
+          }
+        }
       }
     `);
 
     data.allEncounter.edges.forEach(({ node }) => {
       createPage({
-        path: `/appointment/${node.id}/intake/past-medical-hx/${node.patient.problemsList.id}`,
+        path: `/appointment/${node.id}/intake/past-medical-hx/${node.patient.id}`,
+        component: "./src/templates/intake/PastMedicalHxDetail.vue",
+      });
+    });
+
+    data.allCondition.edges.forEach(({ node }) => {
+      createPage({
+        path: `/appointment/${node.patient.encounters__id}/intake/past-medical-hx/detail/${node.id}`,
         component: "./src/templates/intake/PastMedicalHxDetail.vue",
       });
     });
