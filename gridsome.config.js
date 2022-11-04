@@ -85,6 +85,11 @@ module.exports = {
                 typeName: "Patient",
                 linkToFirst: true,
               },
+              {
+                fieldName: "linkedCondition",
+                typeName: "Condition",
+                linkToFirst: true,
+              },
             ],
           },
           {
@@ -96,6 +101,10 @@ module.exports = {
                 fieldName: "Patient",
                 typeName: "Patient",
                 linkToFirst: true,
+              },
+              {
+                fieldName: "Medications",
+                typeName: "Medication",
               },
             ],
           },
@@ -138,14 +147,6 @@ module.exports = {
                 typeName: "Encounter",
                 linkToFirst: true,
               },
-            ],
-          },
-          {
-            name: "Medications", // required
-            typeName: "Medication", // required
-            select: {}, // optional,
-            links: [
-              // optional
             ],
           },
           {

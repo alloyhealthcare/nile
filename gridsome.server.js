@@ -27,6 +27,22 @@ module.exports = function(api) {
             }
           }
         }
+        allPatient {
+          edges {
+            node {
+              id
+              problemsList {
+                id
+              }
+              allergiesList {
+                id
+              }
+              medicationsList {
+                id
+              }
+            }
+          }
+        }
         allCondition {
           edges {
             node {

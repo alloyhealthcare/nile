@@ -10,47 +10,40 @@
   >
     <template #content>
       <h1 class="text-2xl mb-6 font-semibold">Past Medical History</h1>
-      <div class="flex flex-row gap-4 items-center mb-4">
-        <h1 class="font-semibold text-lg ">Active Conditions</h1>
-        <t-button>Add Condition</t-button>
-      </div>
-      <div class="flex flex-col gap-4 w-full relative">
-        <div class="flex-1">
-          <t-table :headers="['Condition', 'Body Site', 'Diagnosed']" :data="$page.encounter.patient.problemsList">
-            <template slot="row" slot-scope="props">
-              <tr :class="props.trClass" :to="$page.encounter.path + 'intake/past-medical-hx/' + props.row.id">
-                <g-link :to="$page.encounter.path + 'intake/past-medical-hx/' + props.row.id">
-                  <td :class="props.tdClass">{{ props.row.name }}</td>
-                  <td :class="props.tdClass">
-                    <div v-if="props.row.bodySite != ''">
-                      <span v-for="bodySite in props.row.bodySite" :key="bodySite.id">{{ bodySite }}</span>
-                    </div>
-                    <span v-else class="text-slate-400">N/a</span>
-                  </td>
-                  <td :class="props.tdClass">
-                    {{ props.row.diagnosed | luxon("date_med") }}
-                  </td>
-                </g-link>
-              </tr>
-            </template>
-          </t-table>
-        </div>
-        <div v-for="problem in $page.encounter.patient.problemsList" :key="problem.id">
-          {{ problem.id }}
-        </div>
-        {{ $page.encounter.id }}
-      </div>
+      <table-section
+        :section="{
+          title: 'Active Conditions',
+          action: 'Condition',
+          type: 'Condition',
+          data: $page.encounter.patient.problemsList,
+          headers: ['Condition', 'Body Site', 'Diagnosed'],
+          tableLink: $page.encounter.path + 'intake/past-medical-hx/',
+        }"
+      />
+      <table-section
+        :section="{
+          title: 'Medications',
+          action: 'Medication',
+          type: 'Medication',
+          data: $page.encounter.patient.medicationsList,
+          headers: ['Condition', 'Name', 'Prescriber', 'Prescribed On'],
+          tableLink: $page.encounter.path + 'intake/past-medical-hx/',
+        }"
+      />
+      <div></div>
     </template>
   </flow-detail>
 </template>
 <script>
 import Layout from "~/layouts/Default.vue";
+import TableSection from "../../components/TableSection.vue";
 import FlowDetail from "../../layouts/FlowDetail.vue";
 
 export default {
   components: {
     Layout,
     FlowDetail,
+    TableSection,
   },
   data() {
     return {
@@ -61,17 +54,7 @@ export default {
       showCard: false,
     };
   },
-  computed: {
-    /* showCard() {
-      if (
-        this
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },*/
-  },
+  computed: {},
   methods: {},
 };
 </script>
@@ -96,6 +79,17 @@ export default {
               name
               bodySite
               diagnosed
+              medications {
+                name
+              }
+            }
+            medicationsList {
+              id
+              name
+              prescriber
+              linkedCondition {
+                name
+              }
             }
           }
 
