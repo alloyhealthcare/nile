@@ -6,7 +6,7 @@
     </div>
     <div class="flex flex-col gap-4 w-full relative">
       <div class="flex-1">
-        <t-table :headers="section.headers" :data="section.data">
+        <t-table :headers="section.headers" :data="section.data" v-if="section.showTable">
           <template slot="row" slot-scope="props">
             <tr :class="props.trClass">
               <td :class="props.tdClass">
@@ -14,7 +14,9 @@
                   ><g-link :to="section.tableLink + props.row.id">{{ props.row.name }}</g-link></span
                 >
                 <span v-if="section.type == 'Medication'"
-                  ><g-link :to="section.tableLink + props.row.id">{{ props.row.linkedCondition.name }}</g-link></span
+                  ><g-link :to="section.tableLink + props.row.id" v-if="props.row.linkedCondition.name != null">{{
+                    props.row.linkedCondition.name
+                  }}</g-link></span
                 >
               </td>
               <td :class="props.tdClass">
@@ -52,9 +54,15 @@ export default {
         title: String,
         type: String,
         action: String,
-        data: Object,
-        headers: Object,
+        data: [Array, Object],
+        headers: Array,
         tableLink: String,
+        showTable: {
+          type: Boolean,
+          default() {
+            return true;
+          },
+        },
       },
     ],
   },

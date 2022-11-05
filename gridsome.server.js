@@ -14,35 +14,6 @@ module.exports = function(api) {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
     const { data } = await graphql(`
       {
-        allEncounter {
-          edges {
-            node {
-              id
-              patient {
-                id
-                problemsList {
-                  id
-                }
-              }
-            }
-          }
-        }
-        allPatient {
-          edges {
-            node {
-              id
-              problemsList {
-                id
-              }
-              allergiesList {
-                id
-              }
-              medicationsList {
-                id
-              }
-            }
-          }
-        }
         allCondition {
           edges {
             node {
@@ -50,6 +21,20 @@ module.exports = function(api) {
               patient {
                 encounters {
                   id
+                  path
+                }
+              }
+            }
+          }
+        }
+        allMedication {
+          edges {
+            node {
+              id
+              patient {
+                encounters {
+                  id
+                  path
                 }
               }
             }
@@ -65,6 +50,19 @@ module.exports = function(api) {
         context: {
           id: node.id,
           encounterId: node.patient.encounters.id,
+          encounterPath: node.patient.encounters.path,
+        },
+      });
+    });
+
+    data.allMedication.edges.forEach(({ node }) => {
+      createPage({
+        path: `/appointment/${node.patient.encounters.id}/intake/past-medical-hx/${node.id}`,
+        component: "./src/templates/intake/PastMedicalHxDetail.vue",
+        context: {
+          id: node.id,
+          encounterId: node.patient.encounters.id,
+          encounterPath: node.patient.encounters.path,
         },
       });
     });

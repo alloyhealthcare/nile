@@ -10,27 +10,30 @@
   >
     <template #content>
       <h1 class="text-2xl mb-6 font-semibold">Past Medical History</h1>
-      <table-section
-        :section="{
-          title: 'Active Conditions',
-          action: 'Condition',
-          type: 'Condition',
-          data: $page.encounter.patient.problemsList,
-          headers: ['Condition', 'Body Site', 'Diagnosed'],
-          tableLink: $page.encounter.path + 'intake/past-medical-hx/',
-        }"
-      />
-      <table-section
-        :section="{
-          title: 'Medications',
-          action: 'Medication',
-          type: 'Medication',
-          data: $page.encounter.patient.medicationsList,
-          headers: ['Condition', 'Name', 'Prescriber', 'Prescribed On'],
-          tableLink: $page.encounter.path + 'intake/past-medical-hx/',
-        }"
-      />
-      <div></div>
+      <div>
+        <table-section
+          :section="{
+            showTable: conditions,
+            title: 'Active Conditions',
+            action: 'Condition',
+            type: 'Condition',
+            data: $page.encounter.patient.problemsList,
+            headers: ['Condition', 'Body Site', 'Diagnosed'],
+            tableLink: $page.encounter.path + 'intake/past-medical-hx/',
+          }"
+        />
+        <table-section
+          :section="{
+            showTable: true,
+            title: 'Medications',
+            action: 'Medication',
+            type: 'Medication',
+            data: $page.encounter.patient.medicationsList,
+            headers: ['Condition', 'Name', 'Prescriber', 'Prescribed On'],
+            tableLink: $page.encounter.path + 'intake/past-medical-hx/',
+          }"
+        />
+      </div>
     </template>
   </flow-detail>
 </template>
@@ -54,7 +57,24 @@ export default {
       showCard: false,
     };
   },
-  computed: {},
+  computed: {
+    conditions() {
+      const problemList = this.$page.encounter.patient.problemsList;
+      if (problemList.length == 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    /*    medications() {
+      const medicationList = this.$page.encounter.patient.medicationsList;
+      if ((medicationList.length = 0)) {
+        return false;
+      } else {
+        return true;
+      }
+    },*/
+  },
   methods: {},
 };
 </script>
