@@ -1,13 +1,8 @@
 <template>
   <div class="flex flex-col">
     <global-navigation />
-    <div class="flex flex-row flex-grow items-stretch">
-      <space-sidebar
-        class="sidebar"
-        :title="spaceTitle"
-        :meta="spaceMeta"
-        :actions="hasSidebarActions"
-      >
+    <div class="flex flex-row flex-grow overflow-hidden items-stretch">
+      <space-sidebar class="sidebar flex-none" :title="spaceTitle" :meta="spaceMeta" :actions="hasSidebarActions">
         <template #sidebarList>
           <slot name="spaceSidebarList" />
         </template>
@@ -15,15 +10,14 @@
           <slot name="spaceSidebarActions" />
         </template>
       </space-sidebar>
-      <div class="z-10 flex flex-col justify-between w-full pl-9 h-full">
-        <transition>
-          <main
-            class="flex flex-row gap-4 page-content overflow-scroll pt-9 h-full w-full"
-          >
-            <slot name="page-content" />
-          </main>
-        </transition>
-        <div class="pb-9 mr-9 justify-self-end">
+      <div class="z-10 flex flex-col justify-between h-full overflow-hidden">
+        <main
+          v-dragscroll:nochilddrag
+          class=" flex flex-row gap-4 page-content pt-9 pr-12 h-full w-full overflow-scroll"
+        >
+          <slot name="page-content" />
+        </main>
+        <div class="pb-9 mr-9 pl-12 justify-self-end">
           <space-navigation>
             <template #spaceNavigationButtons>
               <slot name="spaceNav" />
@@ -50,14 +44,7 @@ export default {
     SpaceSidebar,
     SpaceNavigation,
   },
-  props: [
-    "sidebar",
-    "page-content",
-    "spaceNav",
-    "spaceTitle",
-    "spaceMeta",
-    "hasSidebarActions",
-  ],
+  props: ["sidebar", "page-content", "spaceNav", "spaceTitle", "spaceMeta", "hasSidebarActions"],
 };
 </script>
 

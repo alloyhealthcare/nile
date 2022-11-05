@@ -15,47 +15,58 @@
       <t-button variant="secondary">Test</t-button>
     </template>
     <template slot="page-content">
-      <div class="flex flex-row gap-x-4">
-        <patient-overview-module
-          :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
-          :patient="$page.encounter.patient"
-          :encounter="$page.encounter"
-          :primaryButton="primaryButton"
-          :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-          :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
-        />
-        <medication-list-module
-          :moduleInfo="{ title: 'Medication List', subTitle: $page.encounter.patient.name }"
-          :patient="$page.encounter.patient"
-          :medicationList="$page.encounter.patient.medicationsList"
-          :encounter="$page.encounter"
-          :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
-          :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-          :tertiary-button="{ text: 'Close', path: (showmodule__medications = false) }"
-          v-if="showmodule__medications"
-        />
-      </div>
-      <div class="w-96">
-        <div class="mb-12">
-          <div class="bg-white rounded-md border border-slate-200">Search</div>
+      <div class="flex flex-row gap-x-8">
+        <div class="flex flex-row gap-x-4.5">
+          <patient-overview-module
+            :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
+            :patient="$page.encounter.patient"
+            :encounter="$page.encounter"
+            :primaryButton="primaryButton"
+            :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+            :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
+          />
+          <medication-list-module
+            :moduleInfo="{ title: 'Medication List', subTitle: $page.encounter.patient.name }"
+            :patient="$page.encounter.patient"
+            :medicationList="$page.encounter.patient.medicationsList"
+            :encounter="$page.encounter"
+            :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
+            :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+            v-if="showmodule__medications"
+          />
+          <medication-detail-module
+            v-for="medication in $page.encounter.patient.medicationsList"
+            :key="medication.id"
+            :moduleInfo="{ title: medication.name, subTitle: 'Medication' }"
+            :patient="$page.encounter.patient"
+            :medicationItem="medication"
+            :encounter="$page.encounter"
+            :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
+            :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
+          />
         </div>
-        <div class="mb-4">
-          <span class="font-semibold text-slate-500">Open...</span>
-        </div>
-        <div class="grid grid-cols-2 w-full mb-8">
-          <t-button variant="buttonXL">Last Appointment</t-button>
-          <t-button variant="buttonXL" @click="showmodule__medications = true">Medications</t-button>
-          <t-button variant="buttonXL">Allergies</t-button>
-          <t-button variant="buttonXL">Results</t-button>
-        </div>
-        <div class="mb-4">
-          <span class="font-semibold text-slate-500">Create...</span>
-        </div>
-        <div class="grid grid-cols-2 w-full mb-8">
-          <t-button variant="buttonXL">Send Message</t-button>
-          <t-button variant="buttonXL">Create Order</t-button>
-          <t-button variant="buttonXL">Refill</t-button>
-          <t-button variant="buttonXL">Referral</t-button>
+        <div class="w-96 flex-none">
+          <div class="mb-12">
+            <div class="bg-white rounded-md border border-slate-200">Search</div>
+          </div>
+          <div class="mb-4">
+            <span class="font-semibold text-slate-500">Open...</span>
+          </div>
+          <div class="grid grid-cols-2 w-full mb-8">
+            <t-button variant="buttonXL">Last Appointment</t-button>
+            <t-button variant="buttonXL" @click="showmodule__medications = true">Medications</t-button>
+            <t-button variant="buttonXL">Allergies</t-button>
+            <t-button variant="buttonXL">Results</t-button>
+          </div>
+          <div class="mb-4">
+            <span class="font-semibold text-slate-500">Create...</span>
+          </div>
+          <div class="grid grid-cols-2 w-full mb-8">
+            <t-button variant="buttonXL">Send Message</t-button>
+            <t-button variant="buttonXL">Create Order</t-button>
+            <t-button variant="buttonXL">Refill</t-button>
+            <t-button variant="buttonXL">Referral</t-button>
+          </div>
         </div>
       </div>
     </template>
@@ -134,6 +145,10 @@ query ($id: ID!) {
         frequency
         deliveryMethod
       }
+      problemsList {
+        id
+        name
+      }
     }
   }
 }
@@ -145,6 +160,7 @@ import ItemCard from "../../components/Cards/ItemCard.vue";
 import ModuleCardBase from "../../components/Cards/Modules/ModuleBase/ModuleCardBase.vue";
 import PatientOverviewModule from "../../components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue";
 import MedicationListModule from "../../components/Cards/Modules/ModuleTemplates/MedicationListModule.vue";
+import MedicationDetailModule from "../../components/Cards/Modules/ModuleTemplates/MedicationDetailModule.vue";
 
 export default {
   components: {
@@ -153,6 +169,7 @@ export default {
     ModuleCardBase,
     PatientOverviewModule,
     MedicationListModule,
+    MedicationDetailModule,
   },
   data() {
     return {

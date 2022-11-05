@@ -1,10 +1,15 @@
 <template>
-  <div class="bg-white w-moduleCard flex flex-col rounded-xl shadow shadow-slate-900/10 h-144">
+  <div class="bg-white w-moduleCard relative flex flex-col rounded-xl overflow-hidden shadow shadow-slate-900/10">
     <module-header :headerTitle="moduleInfo.title" :headerSubTitle="moduleInfo.subTitle" />
-    <div class="px-4 py-4 flex-grow overflow-scroll">
+    <div class="px-4 pt-4 py-9 flex-grow overflow-scroll">
       <slot name="content" />
     </div>
-    <module-footer :primaryButton="primaryButton" :secondaryButton="secondaryButton" :tertiaryButton="tertiaryButton" />
+    <module-footer
+      class="absolute inset-x-0 bottom-0"
+      :primaryButton="primaryButton"
+      :secondaryButton="secondaryButton"
+      :tertiaryButton="tertiaryButton"
+    />
   </div>
 </template>
 

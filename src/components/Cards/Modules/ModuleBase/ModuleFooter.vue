@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row w-full px-4 py-2 border-t border-slate-200 justify-between bg-white-10">
+  <div class="module-footer flex flex-row w-full px-4 pb-2 pt-4 justify-between bg-white/20">
     <div class="flex flex-row gap-x-3">
       <t-button :to="primaryButton.path" variant="primaryGreen">{{ primaryButton.text }}</t-button>
       <t-button v-if="secondaryButton.path && secondaryButton.text" :to="secondaryButton.path" variant="secondary">{{
@@ -36,4 +36,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.module-footer {
+  backdrop-filter: blur(12px);
+}
+</style>

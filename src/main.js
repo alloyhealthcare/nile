@@ -9,6 +9,7 @@ import VueLuxon from "vue-luxon";
 import DefaultLayout from "~/layouts/Default.vue";
 
 import VueTailwind from "vue-tailwind";
+import VueDragscroll from "vue-dragscroll";
 
 import {
   TButton,
@@ -31,14 +32,14 @@ const VueTailwindComponents = {
       fixedClasses: "block group font-medium focus:outline-none transition-colors",
       // Classes are applied to the component without any variant (the default)
       classes:
-        "text-gray-900 px-4 py-1 rounded-xl border-2 border-transparent hover:bg-gray-0 hover:text-gray-600 hover:border-gray-400 text-base",
+        "text-gray-900 px-4 py-1 rounded-xl border-2 text-sm border-transparent hover:bg-gray-0 hover:text-gray-600 hover:border-gray-400 text-base",
       // Variants define specific types of components with styling and are added via variant= when writing the component
       variants: {
         primaryGreen:
-          "bg-emerald-500 px-4 py-1 text-white border-2 rounded-xl  border-emerald-500 hover:bg-emerald-100 hover:border-emerald-500 hover:text-emerald-600",
+          "bg-emerald-500 px-4 py-1 text-white leading-none text-sm border-2 rounded-lg  border-emerald-500 hover:bg-emerald-100 hover:border-emerald-500 hover:text-emerald-600",
         primaryBlue:
-          "bg-blue-500 px-4 py-1 text-white border-2 rounded-xl  border-blue-500 hover:bg-blue-100 hover:border-blue-500 hover:text-blue-600",
-        secondary: "bg-slate-100 px-4 py-1 hover:bg-blue-600 hover:text-white rounded-xl ",
+          "bg-blue-500 px-4 py-2 text-white text-sm border-2 rounded-lg  border-blue-500 hover:bg-blue-100 hover:border-blue-500 hover:text-blue-600",
+        secondary: "bg-slate-100 text-sm px-4 py-1 hover:bg-blue-600 hover:text-white rounded-lg ",
         full: "w-full rounded-xl ",
         link:
           "capitalize text-left text-gray-900 border-b border-blue-600 hover:bg-blue-100 px-0.5 py-0.5 hover:text-blue-600 hover:border-blue-600 rounded-t-sm",
@@ -347,6 +348,7 @@ export default function(Vue, { router, head, isClient }) {
   Vue.component("Layout", DefaultLayout);
   Vue.component("font-awesome-icon", FontAwesomeIcon);
   Vue.use(VueTailwind, VueTailwindComponents);
+  Vue.use(VueDragscroll);
   Vue.use(VueLuxon, {
     input: {
       zone: "utc",

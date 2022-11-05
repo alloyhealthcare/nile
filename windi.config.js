@@ -30,11 +30,12 @@ export default {
       height: {
         bigCard: "720px",
         144: "34em",
+        200: "41.5em",
       },
       width: {
         editorSubMenu: "508px",
         moduleCard: "416px",
-        sidebar: "425px",
+        sidebar: "350px",
       },
       colors: {
         fog: "#F3F5F9",

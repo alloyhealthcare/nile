@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="z-20 flex flex-col justify-between px-6 w-sidebar bg-white/30 pt-9 backdrop-blur-xl h-full"
-  >
+  <div class="sidebar z-1 flex flex-col justify-between px-6 w-sidebar bg-white/25 pt-9  h-full">
     <div class="flex flex-col grow">
       <div class="mb-4">
         <h1 class="text-xl text-slate-700">{{ title }}</h1>
@@ -27,4 +25,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.sidebar {
+  backdrop-filter: blur(12px);
+}
+</style>

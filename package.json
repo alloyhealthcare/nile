@@ -26,6 +26,7 @@
     "@tiptap/vue-2": "^2.0.0-beta.84",
     "gridsome": "^0.7.0",
     "tippy.js": "^6.3.7",
+    "vue-dragscroll": "^3.0.1",
     "vue-luxon": "^0.10.0",
     "vue-tailwind": "^2.5.1"
   },

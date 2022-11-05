@@ -4,6 +4,7 @@
     :primaryButton="primaryButton"
     :secondaryButton="secondaryButton"
     :tertiaryButton="tertiaryButton"
+    class="h-144"
   >
     <template #content>
       <div class="w-full">
