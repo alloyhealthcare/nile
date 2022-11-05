@@ -6,7 +6,7 @@
         secondaryButton.text
       }}</t-button>
     </div>
-    <div v-if="tertiaryButton.path && tertiaryButton.text">
+    <div v-if="tertiaryButton != null">
       <t-button :to="tertiaryButton.path">{{ tertiaryButton.text }}</t-button>
     </div>
   </div>

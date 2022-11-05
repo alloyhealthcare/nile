@@ -24,6 +24,39 @@
           :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
           :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
         />
+        <medication-list-module
+          :moduleInfo="{ title: 'Medication List', subTitle: $page.encounter.patient.name }"
+          :patient="$page.encounter.patient"
+          :medicationList="$page.encounter.patient.medicationsList"
+          :encounter="$page.encounter"
+          :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
+          :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+          :tertiary-button="{ text: 'Close', path: (showmodule__medications = false) }"
+          v-if="showmodule__medications"
+        />
+      </div>
+      <div class="w-96">
+        <div class="mb-12">
+          <div class="bg-white rounded-md border border-slate-200">Search</div>
+        </div>
+        <div class="mb-4">
+          <span class="font-semibold text-slate-500">Open...</span>
+        </div>
+        <div class="grid grid-cols-2 w-full mb-8">
+          <t-button variant="buttonXL">Last Appointment</t-button>
+          <t-button variant="buttonXL" @click="showmodule__medications = true">Medications</t-button>
+          <t-button variant="buttonXL">Allergies</t-button>
+          <t-button variant="buttonXL">Results</t-button>
+        </div>
+        <div class="mb-4">
+          <span class="font-semibold text-slate-500">Create...</span>
+        </div>
+        <div class="grid grid-cols-2 w-full mb-8">
+          <t-button variant="buttonXL">Send Message</t-button>
+          <t-button variant="buttonXL">Create Order</t-button>
+          <t-button variant="buttonXL">Refill</t-button>
+          <t-button variant="buttonXL">Referral</t-button>
+        </div>
       </div>
     </template>
     <template #spaceNav>
@@ -93,6 +126,14 @@ query ($id: ID!) {
       sex
       pronouns
       path
+      medicationsList {
+        name
+        id
+        doseAmount
+        doseUnit
+        frequency
+        deliveryMethod
+      }
     }
   }
 }
@@ -103,6 +144,7 @@ import SpaceVue from "../../layouts/Space.vue";
 import ItemCard from "../../components/Cards/ItemCard.vue";
 import ModuleCardBase from "../../components/Cards/Modules/ModuleBase/ModuleCardBase.vue";
 import PatientOverviewModule from "../../components/Cards/Modules/ModuleTemplates/PatientOverviewModule.vue";
+import MedicationListModule from "../../components/Cards/Modules/ModuleTemplates/MedicationListModule.vue";
 
 export default {
   components: {
@@ -110,12 +152,14 @@ export default {
     ItemCard,
     ModuleCardBase,
     PatientOverviewModule,
+    MedicationListModule,
   },
   data() {
     return {
       module: {
         notePath: "/note",
       },
+      showmodule__medications: false,
     };
   },
   computed: {

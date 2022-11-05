@@ -166,7 +166,7 @@ const VueTailwindComponents = {
   "t-tag": {
     component: TTag,
     props: {
-      fixedClasses: "inline-block",
+      fixedClasses: "block text-xs font-medium px-2 py-0.5 rounded-sm",
       classes: "",
       variants: {
         title: "text-2xl leading-8 font-extrabold text-gray-900 tracking-tight",
@@ -174,6 +174,7 @@ const VueTailwindComponents = {
         error: "text-red-500",
         apptType: "bg-teal-light px-2 py-0.5 rounded-lg text-teal-dark font-semibold text-xs",
         badge: "inline-flex items-center px-2 py-0.5 text-sm rounded-md bg-gray-200 text-gray-700 font-medium",
+        medication: "bg-fuchsia-50 text-fuchsia-600",
         avatar:
           "inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500 overflow-hidden leading-none text-center",
         statusActive: "text-blue-600 font-normal text-xs",
