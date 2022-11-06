@@ -44,7 +44,7 @@
             :encounter="$page.encounter"
             :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
             :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
-            v-show="showDetail == medication.id"
+            v-show="medicationDetail"
           />
         </div>
         <div class="w-96 flex-none">
@@ -183,7 +183,7 @@ export default {
         notePath: "/note",
       },
       showmodule__medications: false,
-      showDetail: null,
+      medicationDetail: false,
     };
   },
   computed: {
@@ -233,7 +233,11 @@ export default {
       });
     },
   },
-  methods: {},
+  methods: {
+    showDetail() {
+      return this.medicationList.id;
+    },
+  },
 };
 </script>
 
