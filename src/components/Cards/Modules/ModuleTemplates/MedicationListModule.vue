@@ -9,9 +9,10 @@
     <template #content>
       <div class="w-full">
         <div class="grid grid-cols-2 gap-2.5 w-full">
-          <g-link
+          <button
             v-for="medication in medicationList"
             :key="medication.id"
+            v-on:click="$emit('add-medication-detail', $event.medication.id)"
             class="bg-white border border-slate-200 p-2 rounded-lg flex flex-col gap-5 text-slate-500"
           >
             <div class="flex flex-col place-items-start gap-2">
@@ -21,7 +22,7 @@
               >
             </div>
             <span class="text-sm font-medium font-slate-500">{{ medication.frequency }}</span>
-          </g-link>
+          </button>
         </div>
       </div>
     </template>
@@ -36,7 +37,9 @@ export default {
     ModuleCardBase,
   },
   data() {
-    return {};
+    return {
+      showDetail: null,
+    };
   },
   props: {
     patient: Object,
@@ -47,6 +50,7 @@ export default {
     secondaryButton: Object,
     tertiaryButton: Object,
   },
+  computed: {},
 };
 </script>
 

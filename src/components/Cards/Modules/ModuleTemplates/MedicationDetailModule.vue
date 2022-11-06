@@ -13,14 +13,16 @@
             >{{ medicationItem.doseAmount }}{{ medicationItem.doseUnit }} {{ medicationItem.deliveryMethod }}</t-tag
           >
           <div class="flex flex-row text-xs gap-x-2">
-            <span>{{ patient.age }} yo</span>
-            <span>{{ patient.sex }}</span>
-            <span>{{ patient.pronouns }}</span>
+            <span>Refills 7</span>
           </div>
         </div>
         <div class="flex flex-col gap-y">
           <span class="font-semibold text-slate-800">{{ medicationItem.name }}</span>
           <span class="text-slate-500">{{ medicationItem.frequency }}</span>
+        </div>
+        <div>
+          Reason
+          <g-link>{{ medicationItem.linkedCondition.name }}</g-link>
         </div>
       </div>
     </template>
@@ -30,7 +32,7 @@
 <script>
 import ModuleCardBase from "../ModuleBase/ModuleCardBase.vue";
 export default {
-  name: "MedicationListModule",
+  name: "MedicationDetailModule",
   components: {
     ModuleCardBase,
   },

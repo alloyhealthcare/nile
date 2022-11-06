@@ -10,11 +10,8 @@
           <slot name="spaceSidebarActions" />
         </template>
       </space-sidebar>
-      <div class="z-10 flex flex-col justify-between h-full overflow-hidden">
-        <main
-          v-dragscroll:nochilddrag
-          class=" flex flex-row gap-4 page-content pt-9 pr-12 h-full w-full overflow-scroll"
-        >
+      <div class="z-10 flex relative w-full flex-col justify-between h-full">
+        <main v-dragscroll:nochilddrag class=" flex flex-row gap-4 page-content pl-12 pt-9 pr-12 h-full w-full">
           <slot name="page-content" />
         </main>
         <div class="pb-9 mr-9 pl-12 justify-self-end">

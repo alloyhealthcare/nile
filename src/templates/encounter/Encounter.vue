@@ -15,7 +15,7 @@
       <t-button variant="secondary">Test</t-button>
     </template>
     <template slot="page-content">
-      <div class="flex flex-row gap-x-8">
+      <div class="flex flex-row gap-x-8 ">
         <div class="flex flex-row gap-x-4.5">
           <patient-overview-module
             :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
@@ -32,6 +32,7 @@
             :encounter="$page.encounter"
             :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
             :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+            v-on:add-medication-detail="showDetail"
             v-if="showmodule__medications"
           />
           <medication-detail-module
@@ -43,6 +44,7 @@
             :encounter="$page.encounter"
             :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
             :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
+            v-show="showDetail == medication.id"
           />
         </div>
         <div class="w-96 flex-none">
@@ -144,6 +146,10 @@ query ($id: ID!) {
         doseUnit
         frequency
         deliveryMethod
+        linkedCondition {
+          name
+          id
+        }
       }
       problemsList {
         id
@@ -177,6 +183,7 @@ export default {
         notePath: "/note",
       },
       showmodule__medications: false,
+      showDetail: null,
     };
   },
   computed: {
@@ -205,6 +212,7 @@ export default {
     currentStatus() {
       return this.$page.encounter.status;
     },
+
     currentPath() {
       return this.$page.encounter.path;
     },
