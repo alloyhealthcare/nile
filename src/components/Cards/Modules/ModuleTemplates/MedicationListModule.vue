@@ -12,7 +12,7 @@
           <button
             v-for="medication in medicationList"
             :key="medication.id"
-            v-on:click="$emit('add-medication-detail', this.medicationList.id)"
+            v-on:click="$emit('add-medication-detail', medication.id)"
             class="bg-white border border-slate-200 p-2 rounded-lg flex flex-col gap-5 text-slate-500"
           >
             <div class="flex flex-col place-items-start gap-2">

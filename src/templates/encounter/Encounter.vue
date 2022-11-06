@@ -32,7 +32,7 @@
             :encounter="$page.encounter"
             :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
             :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-            v-on:add-medication-detail="showDetail"
+            v-on:add-medication-detail="(showDetail) => showDetail"
             v-if="showmodule__medications"
           />
           <medication-detail-module
@@ -44,7 +44,7 @@
             :encounter="$page.encounter"
             :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
             :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
-            v-show="medicationDetail"
+            v-show="showMedicationDetail == medication.id"
           />
         </div>
         <div class="w-96 flex-none">
@@ -184,6 +184,7 @@ export default {
       },
       showmodule__medications: false,
       medicationDetail: false,
+      showDetail: null,
     };
   },
   computed: {
@@ -212,7 +213,9 @@ export default {
     currentStatus() {
       return this.$page.encounter.status;
     },
-
+    showMedicationDetail() {
+      return showDetail;
+    },
     currentPath() {
       return this.$page.encounter.path;
     },
@@ -233,11 +236,7 @@ export default {
       });
     },
   },
-  methods: {
-    showDetail() {
-      return this.medicationList.id;
-    },
-  },
+  methods: {},
 };
 </script>
 
