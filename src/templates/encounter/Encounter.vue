@@ -32,6 +32,7 @@
             :encounter="$page.encounter"
             :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
             :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+            :tertiary-button="{ text: 'Close' }"
             v-on:add-medication-detail="(showDetail) => showDetail"
             v-if="showmodule__medications"
           />
@@ -213,9 +214,7 @@ export default {
     currentStatus() {
       return this.$page.encounter.status;
     },
-    showMedicationDetail() {
-      return showDetail;
-    },
+    showMedicationDetail() {},
     currentPath() {
       return this.$page.encounter.path;
     },
