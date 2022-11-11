@@ -10,7 +10,7 @@
       <template #content>
         <div class="w-full">
           <div class="grid grid-cols-2 gap-2.5 w-full">
-            <button
+            <t-button
               v-for="medication in medicationList"
               :key="medication.id"
               v-on:click="$emit('add-medication-detail', medication.id)"
@@ -23,7 +23,7 @@
                 >
               </div>
               <span class="text-sm font-medium font-slate-500">{{ medication.frequency }}</span>
-            </button>
+            </t-button>
           </div>
         </div>
       </template>
@@ -50,6 +50,7 @@ export default {
     secondaryButton: Object,
     tertiaryButton: Object,
   },
+  emits: ["add-medication-detail"],
   methods: {},
   computed: {},
 };

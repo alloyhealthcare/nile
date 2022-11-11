@@ -31,9 +31,10 @@
         :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
         :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
         :tertiary-button="{ text: 'Close' }"
-        v-on:add-medication-detail="showDetail"
-        v-if="showmodule__medications"
+        v-on:add-medication-detail="(value) => (medicationDetail = value)"
+        v-show="showmodule__medications"
       />
+      {{ medicationDetail }}
       <medication-detail-module
         v-for="medication in $page.encounter.patient.medicationsList"
         :key="medication.id"
@@ -43,6 +44,7 @@
         :encounter="$page.encounter"
         :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
         :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
+        v-show="medicationDetail == medication.id"
       />
       <div class="w-96 flex-none">
         <div class="mb-12">
@@ -53,7 +55,9 @@
         </div>
         <div class="grid grid-cols-2 w-full mb-8">
           <t-button variant="buttonXL">Last Appointment</t-button>
-          <t-button variant="buttonXL" @click="showmodule__medications = true">Medications</t-button>
+          <t-button variant="buttonXL" @click="showmodule__medications = !showmodule__medications"
+            >Medications</t-button
+          >
           <t-button variant="buttonXL">Allergies</t-button>
           <t-button variant="buttonXL">Results</t-button>
         </div>
@@ -228,11 +232,7 @@ export default {
       });
     },
   },
-  methods: {
-    showDetail(value) {
-      return (this.medicationDetail = value);
-    },
-  },
+  methods: {},
 };
 </script>
 
