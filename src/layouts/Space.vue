@@ -12,7 +12,7 @@
       </space-sidebar>
       <main
         v-dragscroll:nochilddrag
-        class="flex z-3 flex-row gap-x-8 page-content snap-x relative left-98 pt-9 pl-12 pr-12  main"
+        class="flex z-3 flex-row gap-x-8 page-content snap-x left-98 relative pt-9 pl-12 pr-12 main"
       >
         <slot name="page-content" />
       </main>

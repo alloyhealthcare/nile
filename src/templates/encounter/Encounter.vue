@@ -34,18 +34,17 @@
         v-on:add-medication-detail="(value) => (medicationDetail = value)"
         v-show="showmodule__medications"
       />
-      {{ medicationDetail }}
-      <medication-detail-module
-        v-for="medication in $page.encounter.patient.medicationsList"
-        :key="medication.id"
-        :moduleInfo="{ title: medication.name, subTitle: 'Medication' }"
-        :patient="$page.encounter.patient"
-        :medicationItem="medication"
-        :encounter="$page.encounter"
-        :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
-        :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
-        v-show="medicationDetail == medication.id"
-      />
+      <div v-for="medication in $page.encounter.patient.medicationsList" :key="medication.id" class="flex flex-row">
+        <medication-detail-module
+          :moduleInfo="{ title: medication.name, subTitle: 'Medication' }"
+          :patient="$page.encounter.patient"
+          :medicationItem="medication"
+          :encounter="$page.encounter"
+          :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
+          :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
+          v-if="medicationDetail == medication.id"
+        />
+      </div>
       <div class="w-96 flex-none">
         <div class="mb-12">
           <div class="bg-white rounded-md border border-slate-200">Search</div>
@@ -183,6 +182,7 @@ export default {
         notePath: "/note",
       },
       showmodule__medications: false,
+      medicationDetail: null,
     };
   },
   computed: {
