@@ -39,9 +39,7 @@ export default {
     ModuleCardBase,
   },
   data() {
-    return {
-      showDetail: null,
-    };
+    return {};
   },
   props: {
     patient: Object,
@@ -52,6 +50,7 @@ export default {
     secondaryButton: Object,
     tertiaryButton: Object,
   },
+  methods: {},
   computed: {},
 };
 </script>

@@ -15,61 +15,56 @@
       <t-button variant="secondary">Test</t-button>
     </template>
     <template slot="page-content">
-      <div class="flex flex-row gap-x-8 ">
-        <div class="flex flex-row gap-x-4.5">
-          <patient-overview-module
-            :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
-            :patient="$page.encounter.patient"
-            :encounter="$page.encounter"
-            :primaryButton="primaryButton"
-            :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-            :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
-          />
-          <medication-list-module
-            :moduleInfo="{ title: 'Medication List', subTitle: $page.encounter.patient.name }"
-            :patient="$page.encounter.patient"
-            :medicationList="$page.encounter.patient.medicationsList"
-            :encounter="$page.encounter"
-            :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
-            :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-            :tertiary-button="{ text: 'Close' }"
-            v-on:add-medication-detail="(showDetail) => showDetail"
-            v-if="showmodule__medications"
-          />
-          <medication-detail-module
-            v-for="medication in $page.encounter.patient.medicationsList"
-            :key="medication.id"
-            :moduleInfo="{ title: medication.name, subTitle: 'Medication' }"
-            :patient="$page.encounter.patient"
-            :medicationItem="medication"
-            :encounter="$page.encounter"
-            :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
-            :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
-            v-show="showMedicationDetail == medication.id"
-          />
+      <patient-overview-module
+        :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
+        :patient="$page.encounter.patient"
+        :encounter="$page.encounter"
+        :primaryButton="primaryButton"
+        :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+        :tertiaryButton="{ path: $page.encounter.path + 'note', text: 'Begin' }"
+      />
+      <medication-list-module
+        :moduleInfo="{ title: 'Medication List', subTitle: $page.encounter.patient.name }"
+        :patient="$page.encounter.patient"
+        :medicationList="$page.encounter.patient.medicationsList"
+        :encounter="$page.encounter"
+        :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
+        :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
+        :tertiary-button="{ text: 'Close' }"
+        v-on:add-medication-detail="showDetail"
+        v-if="showmodule__medications"
+      />
+      <medication-detail-module
+        v-for="medication in $page.encounter.patient.medicationsList"
+        :key="medication.id"
+        :moduleInfo="{ title: medication.name, subTitle: 'Medication' }"
+        :patient="$page.encounter.patient"
+        :medicationItem="medication"
+        :encounter="$page.encounter"
+        :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
+        :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
+      />
+      <div class="w-96 flex-none">
+        <div class="mb-12">
+          <div class="bg-white rounded-md border border-slate-200">Search</div>
         </div>
-        <div class="w-96 flex-none">
-          <div class="mb-12">
-            <div class="bg-white rounded-md border border-slate-200">Search</div>
-          </div>
-          <div class="mb-4">
-            <span class="font-semibold text-slate-500">Open...</span>
-          </div>
-          <div class="grid grid-cols-2 w-full mb-8">
-            <t-button variant="buttonXL">Last Appointment</t-button>
-            <t-button variant="buttonXL" @click="showmodule__medications = true">Medications</t-button>
-            <t-button variant="buttonXL">Allergies</t-button>
-            <t-button variant="buttonXL">Results</t-button>
-          </div>
-          <div class="mb-4">
-            <span class="font-semibold text-slate-500">Create...</span>
-          </div>
-          <div class="grid grid-cols-2 w-full mb-8">
-            <t-button variant="buttonXL">Send Message</t-button>
-            <t-button variant="buttonXL">Create Order</t-button>
-            <t-button variant="buttonXL">Refill</t-button>
-            <t-button variant="buttonXL">Referral</t-button>
-          </div>
+        <div class="mb-4">
+          <span class="font-semibold text-slate-500">Open...</span>
+        </div>
+        <div class="grid grid-cols-2 w-full mb-8">
+          <t-button variant="buttonXL">Last Appointment</t-button>
+          <t-button variant="buttonXL" @click="showmodule__medications = true">Medications</t-button>
+          <t-button variant="buttonXL">Allergies</t-button>
+          <t-button variant="buttonXL">Results</t-button>
+        </div>
+        <div class="mb-4">
+          <span class="font-semibold text-slate-500">Create...</span>
+        </div>
+        <div class="grid grid-cols-2 w-full mb-8">
+          <t-button variant="buttonXL">Send Message</t-button>
+          <t-button variant="buttonXL">Create Order</t-button>
+          <t-button variant="buttonXL">Refill</t-button>
+          <t-button variant="buttonXL">Referral</t-button>
         </div>
       </div>
     </template>
@@ -184,8 +179,6 @@ export default {
         notePath: "/note",
       },
       showmodule__medications: false,
-      medicationDetail: false,
-      showDetail: null,
     };
   },
   computed: {
@@ -214,7 +207,6 @@ export default {
     currentStatus() {
       return this.$page.encounter.status;
     },
-    showMedicationDetail() {},
     currentPath() {
       return this.$page.encounter.path;
     },
@@ -224,6 +216,7 @@ export default {
     userItems() {
       return this.$page.encounter.user.appointments;
     },
+
     previousItem() {
       return this.userItems.filter((appointment) => {
         return appointment.apptTime != this.currentItem.apptTime && appointment.apptTime < this.currentItem.apptTime;
@@ -235,7 +228,11 @@ export default {
       });
     },
   },
-  methods: {},
+  methods: {
+    showDetail(value) {
+      return (this.medicationDetail = value);
+    },
+  },
 };
 </script>
 

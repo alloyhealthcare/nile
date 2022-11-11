@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col overflow-hidden">
     <global-navigation />
-    <div class="flex flex-row flex-grow overflow-hidden items-stretch">
-      <space-sidebar class="sidebar flex-none" :title="spaceTitle" :meta="spaceMeta" :actions="hasSidebarActions">
+    <div class="flex flex-row flex-grow overflow-x-auto w-full items-stretch">
+      <space-sidebar class="sidebar absolute z-2" :title="spaceTitle" :meta="spaceMeta" :actions="hasSidebarActions">
         <template #sidebarList>
           <slot name="spaceSidebarList" />
         </template>
@@ -10,17 +10,18 @@
           <slot name="spaceSidebarActions" />
         </template>
       </space-sidebar>
-      <div class="z-10 flex relative w-full flex-col justify-between h-full">
-        <main v-dragscroll:nochilddrag class=" flex flex-row gap-4 page-content pl-12 pt-9 pr-12 h-full w-full">
-          <slot name="page-content" />
-        </main>
-        <div class="pb-9 mr-9 pl-12 justify-self-end">
-          <space-navigation>
-            <template #spaceNavigationButtons>
-              <slot name="spaceNav" />
-            </template>
-          </space-navigation>
-        </div>
+      <main
+        v-dragscroll:nochilddrag
+        class="flex z-3 flex-row gap-x-8 page-content snap-x relative left-98 pt-9 pl-12 pr-12  main"
+      >
+        <slot name="page-content" />
+      </main>
+      <div class="pb-9 mr-9 pl-98 justify-self-end absolute bottom-0 inset-x-0 z-5">
+        <space-navigation>
+          <template #spaceNavigationButtons>
+            <slot name="spaceNav" />
+          </template>
+        </space-navigation>
       </div>
     </div>
   </div>
@@ -54,5 +55,8 @@ export default {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+.main {
+  backdrop-filter: blur(1em);
 }
 </style>
