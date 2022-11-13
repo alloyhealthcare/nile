@@ -15,6 +15,7 @@
       <t-button variant="secondary">Test</t-button>
     </template>
     <template slot="page-content">
+      <!--<component v-bind:is="flowModules" v-bind="currentModuleProps" />-->
       <patient-overview-module
         :moduleInfo="{ title: 'Now', subTitle: $page.encounter.room }"
         :patient="$page.encounter.patient"
@@ -30,10 +31,10 @@
         :encounter="$page.encounter"
         :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
         :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-        :tertiary-button="{ text: 'Close', value: false }"
+        :tertiaryButton="{ text: 'Close', value: !moduleIsVisible }"
         v-on:tertiary-button-action="(value) => (moduleIsVisible = value)"
         v-on:add-medication-detail="(value) => (medicationDetail = value)"
-        :isVisible="false"
+        :isVisible="moduleIsVisible"
       />
       <div v-for="medication in $page.encounter.patient.medicationsList" :key="medication.id">
         <medication-detail-module
@@ -56,7 +57,7 @@
           <span class="font-semibold text-slate-500">Open...</span>
         </div>
         <div class="grid grid-cols-2 w-full mb-8">
-          <t-button variant="buttonXL">Last Appointment</t-button>
+          <t-button variant="buttonXL" @click="flowModules = 'MedicationListModule'">Last Appointment</t-button>
           <t-button variant="buttonXL" @click="moduleIsVisible = !moduleIsVisible">Medications</t-button>
           <t-button variant="buttonXL">Allergies</t-button>
           <t-button variant="buttonXL">Results</t-button>
@@ -183,9 +184,33 @@ export default {
         notePath: "/note",
       },
       moduleIsVisible: false,
+      flowModules: PatientOverviewModule,
     };
   },
   computed: {
+    currentModuleProps() {
+      if (this.flowModules === PatientOverviewModule) {
+        return {
+          moduleInfo: { title: "Now", subTitle: this.$page.encounter.room },
+          patient: this.$page.encounter.patient,
+          encounter: this.$page.encounter,
+          primaryButton: this.primaryButton,
+          secondaryButton: { path: this.$page.encounter.path + "intake/vitals", text: "Review" },
+          tertiaryButton: { path: this.$page.encounter.path + "note", text: "Begin" },
+        };
+      }
+      if (this.flowModules === MedicationListModule) {
+        return {
+          moduleInfo: { title: "Medication List", subTitle: $page.encounter.patient.name },
+          patient: this.$page.encounter.patient,
+          medicationList: this.$page.encounter.patient.medicationsList,
+          encounter: this.$page.encounter,
+          primaryButton: { text: "Prescribe", path: $page.encounter.path },
+          secondaryButton: { path: $page.encounter.path + "intake/vitals", text: "Review" },
+          tertiaryButton: { text: "Close", value: false },
+        };
+      }
+    },
     primaryButton: {
       get() {
         if (this.$page.encounter.status == "Roomed") {

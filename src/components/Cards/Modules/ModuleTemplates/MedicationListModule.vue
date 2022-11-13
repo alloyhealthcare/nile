@@ -51,7 +51,7 @@ export default {
     primaryButton: Object,
     secondaryButton: Object,
     tertiaryButton: Object,
-    isVisible: Function,
+    isVisible: Boolean,
   },
   emits: ["add-medication-detail"],
   methods: {},
