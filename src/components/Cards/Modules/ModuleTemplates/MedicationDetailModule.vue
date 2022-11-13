@@ -6,6 +6,7 @@
       :secondaryButton="secondaryButton"
       :tertiaryButton="tertiaryButton"
       class="h-144"
+      v-if="isVisible"
     >
       <template #content>
         <div class="w-full">
@@ -49,6 +50,7 @@ export default {
     primaryButton: Object,
     secondaryButton: Object,
     tertiaryButton: Object,
+    isVisible: Boolean,
   },
 };
 </script>

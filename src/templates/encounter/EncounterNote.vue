@@ -40,13 +40,6 @@
                   unit: '%',
                 }"
               />
-              <vital-item-card
-                :item="{
-                  value: $page.encounter.vitals.pulseOx,
-                  vitalType: 'Sp02',
-                  unit: '%',
-                }"
-              />
             </div>
           </div>
           <div class="mb-6">

@@ -58,7 +58,7 @@ module.exports = function(api) {
     data.allMedication.edges.forEach(({ node }) => {
       createPage({
         path: `/appointment/${node.patient.encounters.id}/intake/past-medical-hx/${node.id}`,
-        component: "./src/templates/intake/PastMedicalHxDetail.vue",
+        component: "./src/templates/intake/PastMedicalHxMedicationDetail.vue",
         context: {
           id: node.id,
           encounterId: node.patient.encounters.id,

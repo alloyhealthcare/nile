@@ -5,7 +5,7 @@
     :nextPath="$context.encounterPath + 'intake/chief-complaint'"
     prevPage="Social Hx"
     :prevPath="$context.encounterPath + 'intake/social-hx'"
-    :thisPatient="$page.condition.patient"
+    :thisPatient="$page.medication.patient"
   >
     <template #content>
       <h1 class="text-2xl mb-6 font-semibold">Past Medical History</h1>
@@ -17,7 +17,7 @@
               title: 'Active Conditions',
               action: 'Condition',
               type: 'Condition',
-              data: $page.condition.patient.problemsList,
+              data: $page.medication.patient.problemsList,
               headers: ['Condition', 'Body Site', 'Diagnosed'],
               tableLink: $context.encounterPath + 'intake/past-medical-hx/',
             }"
@@ -28,7 +28,7 @@
               title: 'Medications',
               action: 'Medication',
               type: 'Medication',
-              data: $page.condition.patient.medicationsList,
+              data: $page.medication.patient.medicationsList,
               headers: ['Condition', 'Name', 'Prescriber', 'Prescribed On'],
               tableLink: $context.encounterPath + 'intake/past-medical-hx/',
             }"
@@ -37,7 +37,7 @@
         <transition name="fade" appear>
           <div class="w-2/5">
             <div class="bg-white rounded-lg p-4">
-              {{ $page.condition.name }}
+              {{ $page.medication.name }}
               <g-link :to="$context.encounterPath + '/intake/past-medical-hx'">Close</g-link>
             </div>
           </div>
@@ -87,12 +87,12 @@ export default {
 
 <page-query>
     query ($id: ID!) {
-        condition (id: $id) {
+        medication (id: $id) {
+          id
+          name
+          patient {
             id
             name
-            patient {
-              id
-              name
               birthDate
               mrn
               pronouns
@@ -105,14 +105,7 @@ export default {
                 bodySite
                 diagnosed
               }
-              medicationsList {
-                name
-                prescriber
-                linkedCondition {
-                  name
-                }
-              }
-            }
+          }
         }
     }
     </page-query>

@@ -30,11 +30,12 @@
         :encounter="$page.encounter"
         :primaryButton="{ text: 'Prescribe', path: $page.encounter.path }"
         :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Review' }"
-        :tertiary-button="{ text: 'Close' }"
+        :tertiary-button="{ text: 'Close', value: false }"
+        v-on:tertiary-button-action="(value) => (moduleIsVisible = value)"
         v-on:add-medication-detail="(value) => (medicationDetail = value)"
-        v-show="showmodule__medications"
+        :isVisible="false"
       />
-      <div v-for="medication in $page.encounter.patient.medicationsList" :key="medication.id" class="flex flex-row">
+      <div v-for="medication in $page.encounter.patient.medicationsList" :key="medication.id">
         <medication-detail-module
           :moduleInfo="{ title: medication.name, subTitle: 'Medication' }"
           :patient="$page.encounter.patient"
@@ -42,7 +43,9 @@
           :encounter="$page.encounter"
           :primaryButton="{ text: 'Refill', path: $page.encounter.path }"
           :secondaryButton="{ path: $page.encounter.path + 'intake/vitals', text: 'Change Pharmacy' }"
-          v-if="medicationDetail == medication.id"
+          :tertiary-button="{ text: 'Close', action: null }"
+          v-on:tertiary-button-action="(value) => (medicationDetail = value)"
+          :isVisible="true"
         />
       </div>
       <div class="w-96 flex-none">
@@ -54,9 +57,7 @@
         </div>
         <div class="grid grid-cols-2 w-full mb-8">
           <t-button variant="buttonXL">Last Appointment</t-button>
-          <t-button variant="buttonXL" @click="showmodule__medications = !showmodule__medications"
-            >Medications</t-button
-          >
+          <t-button variant="buttonXL" @click="moduleIsVisible = !moduleIsVisible">Medications</t-button>
           <t-button variant="buttonXL">Allergies</t-button>
           <t-button variant="buttonXL">Results</t-button>
         </div>
@@ -181,8 +182,7 @@ export default {
       module: {
         notePath: "/note",
       },
-      showmodule__medications: false,
-      medicationDetail: null,
+      moduleIsVisible: false,
     };
   },
   computed: {
@@ -208,6 +208,9 @@ export default {
         }
       },*/
     },
+    currentMedicationDetail() {
+      return this.$page.encounter.patient.medicationsList.id;
+    },
     currentStatus() {
       return this.$page.encounter.status;
     },
@@ -220,7 +223,6 @@ export default {
     userItems() {
       return this.$page.encounter.user.appointments;
     },
-
     previousItem() {
       return this.userItems.filter((appointment) => {
         return appointment.apptTime != this.currentItem.apptTime && appointment.apptTime < this.currentItem.apptTime;

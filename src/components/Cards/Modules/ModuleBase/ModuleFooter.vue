@@ -7,7 +7,9 @@
       }}</t-button>
     </div>
     <div v-if="tertiaryButton != null">
-      <t-button :to="tertiaryButton.path">{{ tertiaryButton.text }}</t-button>
+      <t-button :to="tertiaryButton.path" v-on:click="$emit('tertiary-button-action', tertiaryButton.value)">{{
+        tertiaryButton.text
+      }}</t-button>
     </div>
   </div>
 </template>
@@ -28,8 +30,10 @@ export default {
     tertiaryButton: {
       path: String,
       text: String,
+      value: Boolean,
     },
   },
+  emits: ["tertiary-button-action"],
   data() {
     return {};
   },
