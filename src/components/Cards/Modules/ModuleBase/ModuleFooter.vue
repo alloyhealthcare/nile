@@ -1,5 +1,5 @@
 <template>
-  <div class="module-footer flex flex-row w-full px-4 pb-2 pt-4 justify-between bg-white/20">
+  <div class="module-footer flex flex-row w-full px-4 pb-4 pt-4 justify-between bg-white/20">
     <div class="flex flex-row gap-x-3">
       <t-button :to="primaryButton.path" variant="primaryGreen">{{ primaryButton.text }}</t-button>
       <t-button v-if="secondaryButton.path && secondaryButton.text" :to="secondaryButton.path" variant="secondary">{{
